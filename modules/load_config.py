@@ -1,3 +1,8 @@
+from modules.components.drivebase import driveBase
+from modules.components.lightSensor import lightSensor
+from modules.components.runButton import runButton
+from modules.components.runState import runState
+
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                                  InfraredSensor, UltrasonicSensor, GyroSensor)
@@ -6,3 +11,30 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import Font, SoundFile, ImageFile
 
+from os import fork, popen
+import json
+
+
+class config:
+    def __init__(self):
+        self.name = "dingo"  # popen('hostname').read().strip()
+        self.config = json.load(open("configs/" + self.name + ".json", "r"))
+
+        self.ev3 = EV3Brick()
+        self.state = runState()
+        self.runButton = None
+
+        if self.name == "dingo":
+            self.runButton = runButton()
+            self.Lmotor = Motor(Port.A)
+            self.Rmotor = Motor(Port.D)
+            self.gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
+            self.drive = driveBase(
+                DriveBase(self.Lmotor, self.Rmotor, 100, 100), self.gyro)
+            self.LMmotor = Motor(Port.B)
+            self.RMmotor = Motor(Port.C)
+            self.Llight = lightSensor(ColorSensor(Port.S3))
+            self.Rlight = lightSensor(ColorSensor(Port.S4))
+            # self.xlift = forklift(Motor(Port.B))
+            # self.ylift = forklift(Motor(Port.C))
+            # self.lift = doubleForklift(self.xlift, self.ylift)
