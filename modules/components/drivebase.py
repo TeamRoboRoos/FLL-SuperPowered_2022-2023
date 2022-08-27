@@ -5,12 +5,12 @@ from pybricks.tools import StopWatch, wait
 
 
 class driveBase:
-    def __init__(self, config, drive, LMmotor, RMmotor, gyro, ev3, runButton=None, Llight=None, Rlight=None):
+    def __init__(self, config, drive, Lmotor, Rmotor, gyro, ev3, runButton=None, Llight=None, Rlight=None):
         self.drive = drive
         self.gyro = gyro
         self.config = config
-        self.LMmotor = LMmotor
-        self.RMmotor = RMmotor
+        self.LLmotor = Lmotor
+        self.RLmotor = Rmotor
 
         self.SPEEDLIST = [self.getSpeed(dist)
                           for dist in range(0, config.SPEED_LIST_COUNT)]
