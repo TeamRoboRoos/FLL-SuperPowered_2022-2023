@@ -3,6 +3,10 @@ from modules.components.lightSensor import lightSensor
 from modules.components.runButton import runButton
 from modules.components.runState import runState
 
+from test.run1 import run1
+from test.run2 import run2
+from test.run3 import run3
+
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
                                  InfraredSensor, UltrasonicSensor, GyroSensor)
@@ -21,6 +25,7 @@ class config:
         self.ev3 = EV3Brick()
         self.state = runState()
         self.runButton = None
+        self.leftButton = None
 
         if self.name == "dingo":
             self.Lmotor = Motor(Port.A)
@@ -37,8 +42,8 @@ class config:
                 DriveBase(self.Lmotor, self.Rmotor, 100, 100), self.gyro, self.Llight, self.Rlight)
 
             self.menu = {
-                "runs": ["run1", "run2", "run3"],
-                "utility": ["lightCal"]
+                "runs": [["run1", "run2", "run3"], [run1(self), run2(self), run3(self)]],
+                "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyrodrift, self.drive.tyreClean]]
             }
             # self.xlift = forklift(Motor(Port.B))
             # self.ylift = forklift(Motor(Port.C))

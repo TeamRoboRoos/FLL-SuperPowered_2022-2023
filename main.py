@@ -5,4 +5,4 @@ from modules.menu import menu
 
 config = config()
 
-menu = menu(config.ev3, config.menu, config.runButton)
+menu = menu(config)
