@@ -27,24 +27,30 @@ class config:
         self.runButton = None
         self.leftButton = None
 
-        if self.name == "dingo":
-            self.Lmotor = Motor(Port.A)
+        if self.name == "ev3dev":
+            self.SPEED_LIST_COUNT = 2000
+            self.ACCELERATION = 250
+            self.STARTSPEED = 50
+
+            self.Lmotor = Motor(Port.B)
             self.Rmotor = Motor(Port.D)
-            self.LMmotor = Motor(Port.B)
-            self.RMmotor = Motor(Port.C)
+            self.LMmotor = Motor(Port.C)
+            self.RMmotor = Motor(Port.A)
 
-            self.runButton = runButton()
+            # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
-            self.Llight = lightSensor(ColorSensor(Port.S3))
-            self.Rlight = lightSensor(ColorSensor(Port.S4))
+            self.Llight = lightSensor(ColorSensor(Port.S4))
+            self.Rlight = lightSensor(ColorSensor(Port.S3))
 
-            self.drive = driveBase(
-                DriveBase(self.Lmotor, self.Rmotor, 100, 100), self.gyro, self.Llight, self.Rlight)
+            self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 100, 100),
+                                   self.Lmotor, self.Rmotor, self.gyro, self.ev3, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
                 "runs": [["run1", "run2", "run3"], [run1(self), run2(self), run3(self)]],
-                "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyrodrift, self.drive.tyreClean]]
+                "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
+                "pages": ["runs", "utility"]
             }
+
             # self.xlift = forklift(Motor(Port.B))
             # self.ylift = forklift(Motor(Port.C))
             # self.lift = doubleForklift(self.xlift, self.ylift)
