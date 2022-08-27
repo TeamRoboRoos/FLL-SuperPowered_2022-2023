@@ -1,3 +1,4 @@
+from pybricks.media.ev3dev import Font
 from pybricks.parameters import Button
 from pybricks.tools import StopWatch, wait
 from threading import Thread
@@ -15,6 +16,9 @@ class menu:
         del config.menu["pages"]
         self.state = config.state.state
         self.config = config
+
+        font = Font("Terminal", 16, monospace=True)
+        self.ev3.screen.set_font(font)
 
         if self.ev3.battery.voltage() < 8100:
             self.ev3.speaker.beep(1500, 2000)
@@ -63,9 +67,9 @@ class menu:
         self.ev3.screen.clear()
         for item in self.menu[self.pages[pageIdx]][0]:
             if self.menu[self.pages[pageIdx]][0].index(item) == curr_index:
-                self.ev3.screen.print(">>>", item)
+                self.ev3.screen.print(">", item)
             else:
-                self.ev3.screen.print("   ", item)
+                self.ev3.screen.print(" ", item)
         self.ev3.screen.print(
             self.config.name, ":", self.ev3.battery.voltage(), end="")
 
