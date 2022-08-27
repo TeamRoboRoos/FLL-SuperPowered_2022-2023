@@ -11,14 +11,12 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import Font, SoundFile, ImageFile
 
-from os import fork, popen
-import json
+from os import popen
 
 
 class config:
     def __init__(self):
-        self.name = "dingo"  # popen('hostname').read().strip()
-        self.config = json.load(open("configs/" + self.name + ".json", "r"))
+        self.name = popen('hostname').read().strip()
 
         self.ev3 = EV3Brick()
         self.state = runState()
@@ -37,6 +35,11 @@ class config:
 
             self.drive = driveBase(
                 DriveBase(self.Lmotor, self.Rmotor, 100, 100), self.gyro, self.Llight, self.Rlight)
+
+            self.menu = {
+                "runs": ["run1", "run2", "run3"],
+                "utility": ["lightCal"]
+            }
             # self.xlift = forklift(Motor(Port.B))
             # self.ylift = forklift(Motor(Port.C))
             # self.lift = doubleForklift(self.xlift, self.ylift)
