@@ -25,16 +25,18 @@ class config:
         self.runButton = None
 
         if self.name == "dingo":
-            self.runButton = runButton()
             self.Lmotor = Motor(Port.A)
             self.Rmotor = Motor(Port.D)
-            self.gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
-            self.drive = driveBase(
-                DriveBase(self.Lmotor, self.Rmotor, 100, 100), self.gyro)
             self.LMmotor = Motor(Port.B)
             self.RMmotor = Motor(Port.C)
+
+            self.runButton = runButton()
+            self.gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
             self.Llight = lightSensor(ColorSensor(Port.S3))
             self.Rlight = lightSensor(ColorSensor(Port.S4))
+
+            self.drive = driveBase(
+                DriveBase(self.Lmotor, self.Rmotor, 100, 100), self.gyro, self.Llight, self.Rlight)
             # self.xlift = forklift(Motor(Port.B))
             # self.ylift = forklift(Motor(Port.C))
             # self.lift = doubleForklift(self.xlift, self.ylift)
