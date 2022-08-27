@@ -75,7 +75,7 @@ class menu:
 
         self.state = self.config.state.running
 
-        Thread(func)
+        Thread(func).start()
 
         # Wait for 2 seconds or until run button is released
         timer = StopWatch()
