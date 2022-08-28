@@ -31,9 +31,11 @@ class config:
             self.SPEED_LIST_COUNT = 2000
             self.ACCELERATION = 250
             self.STARTSPEED = 50
+            self.TURN_SPEED_MIN = 20
+            self.TURN_SPEED_MAX = 180
 
-            self.Lmotor = Motor(Port.B)
-            self.Rmotor = Motor(Port.D)
+            self.Lmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = Motor(Port.D, Direction.COUNTERCLOCKWISE)
             self.LMmotor = Motor(Port.C)
             self.RMmotor = Motor(Port.A)
 
@@ -42,7 +44,7 @@ class config:
             self.Llight = lightSensor(ColorSensor(Port.S4))
             self.Rlight = lightSensor(ColorSensor(Port.S3))
 
-            self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 100, 100),
+            self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 78.4, 104),
                                    self.Lmotor, self.Rmotor, self.gyro, self.ev3, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
