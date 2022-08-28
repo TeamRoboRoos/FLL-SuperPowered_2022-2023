@@ -14,7 +14,6 @@ class menu:
         self.menu = config.menu
         self.pages = config.menu["pages"]
         del config.menu["pages"]
-        self.state = config.state.state
         self.config = config
 
         font = Font("Terminal", 16, monospace=True)
@@ -37,8 +36,8 @@ class menu:
         button = self.ev3.buttons.pressed()
         if len(button) == 1:
             if Button.CENTER in button:
-                self.Run(self.menu[self.page[self.page]]
-                         [1][self.index], use_dec=self.page == 0)
+                self.run(self.menu[self.pages[self.page]]
+                         [1][self.index], isRun=self.page == 0)
                 self.index += 1
             elif Button.UP in button:
                 self.index -= 1
@@ -54,8 +53,8 @@ class menu:
                 self.index = 0
                 self.refresh_time = 400
         elif self.config.runButton != None and self.config.runButton.pressed() == True:
-            self.Run(self.menu[self.pages[self.page]]
-                     [1][self.index].run, self.page == 0)
+            self.run(self.menu[self.pages[self.page]]
+                     [1][self.index], isRun=self.page == 0)
             self.index += 1
 
     def wrap_index(self, idx, theList):
@@ -79,9 +78,9 @@ class menu:
         if isRun == False:
             return func()
 
-        self.state = self.config.state.running
+        self.config.state.setState(self.config.state.running)
 
-        Thread(func).start()
+        func.start()
 
         # Wait for 2 seconds or until run button is released
         timer = StopWatch()
@@ -90,13 +89,11 @@ class menu:
             wait(20)
 
         # Wait until run finishes or is stopped via run button
-        while self.state != self.config.state.standby:
+        while self.config.state.getState() != 1:
             if (self.config.runButton != None and self.config.runButton.pressed() ==
                     True) or Button.CENTER in self.ev3.buttons.pressed():
-                self.state = self.config.state.stop
+                self.config.state.setState(self.config.state.stop)
 
             wait(200)
         self.ev3.speaker.beep(frequency=1000, duration=250)
-        wait(1000)
-        wait(1000)
-        self.state = self.config.state.standby
+        self.config.state.setState(self.config.state.standby)

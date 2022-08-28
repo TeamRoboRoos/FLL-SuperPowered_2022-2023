@@ -17,7 +17,7 @@ class doubleForklift:
         self.ylift.stop()
 
     def initPos(self, xpos=0, ypos=None, Wait=3000):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         if ypos == None:
@@ -29,21 +29,21 @@ class doubleForklift:
             wait(50)
 
     def moveTo(self, x, y, x_speed=400, y_speed=400, Wait=10000):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         Thread(self.xlift.moveTo, x, x_speed, wait=Wait).start()
         Thread(self.ylift.moveTo, y, y_speed, wait=Wait).start()
-        while Wait and not self.done() and self.config.state.state != 3:
+        while Wait and not self.done() and self.config.state.getState() != 3:
             wait(50)
 
     def move(self, delta_y, delta_x, x_speed=400, y_speed=400, Wait=10000):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         self.xlift.move(delta_x, x_speed, wait=0)
         self.ylift.move(delta_y, y_speed, wait=Wait)
-        while Wait and not self.done() and self.config.state.state != 3:
+        while Wait and not self.done() and self.config.state.getState() != 3:
             wait(50)
 
     def done(self):

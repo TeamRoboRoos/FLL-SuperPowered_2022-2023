@@ -58,7 +58,7 @@ class driveBase:
     """
 
     def lineFollower(self, distance=None, speed=150, mode=0, kp=None, ki=0, kd=None):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         self.drive.reset()
@@ -114,7 +114,7 @@ class driveBase:
             # Start PID line following until exit condition meet
             # Check if robot has completed the right distance
             while curr_distance <= distance:
-                if self.config.state.state == 3:
+                if self.config.state.getState() == 3:
                     break
                 # Calculate error, derivative and integral
                 if mode == 0:
@@ -142,7 +142,7 @@ class driveBase:
     # colorsensor
 
     def lightCal(self):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         Lmax = 0
@@ -199,7 +199,8 @@ class driveBase:
             delta_distance = round(abs(distance - curr_distance))
         else:
             delta_distance = round(abs(curr_distance))
-        speed = self.SPEEDLIST[min(delta_distance, self.SPEED_LIST_COUNT-1)]
+        speed = self.SPEEDLIST[min(
+            delta_distance, self.config.SPEED_LIST_COUNT-1)]
         return self.sign(speedLimit) * min(speed, abs(speedLimit))
 
     # angle: angle to turn in degrees
@@ -217,7 +218,7 @@ class driveBase:
     # When heading is set to None, moves with current heading
 
     def moveDist(self, distance, speed=400, heading=None, up=True, down=True, timeout=None):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         posDistance = abs(distance)
@@ -238,7 +239,7 @@ class driveBase:
 
         self.drive.reset()
         timer = StopWatch()
-        while self.config.state.state != 3 and timer.time() < timeout:
+        while self.config.state.getState() != 3 and timer.time() < timeout:
             # print(runState.getStopFlag(), runButton.pressed())
             curr_distance = abs(self.drive.distance())
             if curr_distance >= posDistance:
@@ -265,7 +266,7 @@ class driveBase:
         #     f.write("\n")
 
     def moveArc(self, radius, heading, speed=100, timeout=10000):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         turn_rate = (360 * speed) / (math.pi * 2 * radius)
@@ -275,20 +276,20 @@ class driveBase:
         runTime = StopWatch()
         self.drive.drive(speed, turn_rate)
         while self.turnAngle(heading) not in range(-tolerance, tolerance) and runTime.time() < timeout:
-            if self.config.state.state == 3:
+            if self.config.state.getState() == 3:
                 break
         self.stop()
         # wait(1000)
         # print(tolerance, st_heading, "->", self.getHead(), ":", self.getHead() - st_heading)
 
     def turnTo(self, heading, tolerance=2, timeout=4000):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         angle = self.turnAngle(heading)
         runTime = StopWatch()
         while angle not in range(-tolerance, tolerance) and runTime.time() < timeout:
-            if self.config.state.state == 3:
+            if self.config.state.getState() == 3:
                 break
             self.drive.drive(0, self.turnSpeed(angle))
             angle = self.turnAngle(heading)
@@ -296,7 +297,7 @@ class driveBase:
         # print(heading, self.getHead(), range(-tolerance, tolerance))
 
     def spinTo(self, heading, tolerance=2, timeout=4000):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         angle = self.turnAngle(heading)
@@ -310,7 +311,7 @@ class driveBase:
     """
 
     def moveColour(self, sensor, colorlist, heading=None):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         if heading == None:
@@ -322,7 +323,7 @@ class driveBase:
         self.stop()
 
     def moveLight(self, sensor, limits, heading=None, timeout=10000):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         timer = StopWatch()
@@ -332,13 +333,13 @@ class driveBase:
             if self.turnAngle(heading) not in range(-5, 5):
                 self.turnTo(heading)
         while sensor.readLight() not in range(int(limits[0]), int(limits[1])) and timer.time() < timeout:
-            if self.config.state.state == 3:
+            if self.config.state.getState() == 3:
                 break
             self.drive.drive(80, self.turnAngle(heading))
         self.stop()
 
     def moveStall(self, duty=30, heading=None, speed=-200, timeout=10000):
-        if self.config.state.state == 3:
+        if self.config.state.getState() == 3:
             return
 
         if heading != None:
@@ -352,7 +353,7 @@ class driveBase:
                    speed, Stop.COAST, duty).start()
         wait(50)
         while (self.LLmotor.control.done() == False or self.RLmotor.control.done() == False) and timer.time() < timeout:
-            if self.config.state.state == 3:
+            if self.config.state.getState() == 3:
                 self.stop()
                 return
         self.stop()
