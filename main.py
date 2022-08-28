@@ -4,9 +4,9 @@ from modules.load_config import config
 from modules.menu import menu
 
 
-Config = config()
+config = config()
 
-menu = menu(Config)
+menu = menu(config)
 
 try:
     while True:
