@@ -5,12 +5,16 @@ from pybricks.tools import StopWatch, wait
 
 
 class driveBase:
-    def __init__(self, config, drive, Lmotor, Rmotor, gyro, ev3, runButton=None, Llight=None, Rlight=None):
+    def __init__(self, config, drive, Lmotor, Rmotor, gyro, runButton=None, Llight=None, Rlight=None):
         self.drive = drive
         self.gyro = gyro
+        self.ev3 = config.ev3
+        self.runButton = runButton
         self.config = config
         self.LLmotor = Lmotor
         self.RLmotor = Rmotor
+        self.Llight = Llight
+        self.Rlight = Rlight
 
         self.SPEEDLIST = [self.getSpeed(dist)
                           for dist in range(0, config.SPEED_LIST_COUNT)]
@@ -43,7 +47,7 @@ class driveBase:
     def tyreClean(self):
         self.drive.drive(200, 0)
         wait(1000)
-        while (self.runButton != None and self.runButton.pressed() == True) or Button.CENTER in self.ev3.buttons.pressed():
+        while (self.runButton != None and self.runButton.pressed() != True) or not Button.CENTER in self.ev3.buttons.pressed():
             wait(50)
         self.drive.stop()
         wait(1000)
