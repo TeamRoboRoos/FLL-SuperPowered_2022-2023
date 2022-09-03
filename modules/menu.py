@@ -9,8 +9,10 @@ class menu:
     page = 0
     refresh_time = 100
 
-    def __init__(self, config):
+    def __init__(self, config, quiet):
         self.ev3 = config.ev3
+        if quiet:
+            self.ev3.speaker.set_volume(0)
         self.menu = config.menu
         self.pages = config.menu["pages"]
         del config.menu["pages"]
