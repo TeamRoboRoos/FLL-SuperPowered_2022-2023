@@ -35,17 +35,17 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "ev3dev.cal"
 
-            self.Lmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = Motor(Port.D, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = Motor(Port.A)
-            self.RMmotor = Motor(Port.C)
+            self.Lmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
+            self.LMmotor = Motor(Port.B)
+            self.RMmotor = Motor(Port.D)
 
             # self.runButton = runButton(TouchSensor(Port))
-            self.gyro = GyroSensor(Port.S2, Direction.COUNTERCLOCKWISE)
-            self.Llight = lightSensor(ColorSensor(Port.S4))
-            self.Rlight = lightSensor(ColorSensor(Port.S3))
+            self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
+            self.Llight = lightSensor(ColorSensor(Port.S3))
+            self.Rlight = lightSensor(ColorSensor(Port.S4))
 
-            self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 78.4, 104),
+            self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 56, 104),
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
