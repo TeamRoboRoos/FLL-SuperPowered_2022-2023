@@ -7,11 +7,13 @@ from modules.menu import menu
 config = config()
 
 menu = menu(config, False)
+print("Started")
 
 try:
     while True:
         menu.update()
 except KeyboardInterrupt:
-    for i in range(5, len(dir(config))):
-        exec(dir(config)[i] + " = config." + dir(config)[i])
+    for i in range(0, len(dir(config))):
+        if "_" not in list(dir(config)[i]):
+            exec(dir(config)[i] + " = config." + dir(config)[i])
     sys.exit()
