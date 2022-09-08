@@ -1,7 +1,6 @@
 from pybricks.media.ev3dev import Font
 from pybricks.parameters import Button
 from pybricks.tools import StopWatch, wait
-from threading import Thread
 
 
 class menu:
