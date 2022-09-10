@@ -351,10 +351,10 @@ class driveBase:
         l_angle = None
         r_angle = None
         timer = StopWatch()
-        L = Thread(self.LLmotor.run_until_stalled,
-                   speed, Stop.COAST, duty).start()
-        R = Thread(self.RLmotor.run_until_stalled,
-                   speed, Stop.COAST, duty).start()
+        L = Thread(target=self.LLmotor.run_until_stalled,
+                   args=(speed, Stop.COAST, duty)).start()
+        R = Thread(target=self.RLmotor.run_until_stalled,
+                   args=(speed, Stop.COAST, duty)).start()
         wait(50)
         while (self.LLmotor.control.done() == False or self.RLmotor.control.done() == False) and timer.time() < timeout:
             if self.config.state.getState() == 3:

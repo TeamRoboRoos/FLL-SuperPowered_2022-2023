@@ -22,8 +22,8 @@ class doubleForklift:
 
         if ypos == None:
             ypos = -self.ylift.RACKLENGTH/2
-        Thread(self.xlift.initPos, xpos).start()
-        Thread(self.ylift.initPos, ypos).start()
+        Thread(target=self.xlift.initPos, args=(xpos)).start()
+        Thread(target=self.ylift.initPos, args=(ypos)).start()
         wait(50)
         while self.done() == False and Wait > 0:
             wait(50)
@@ -32,8 +32,10 @@ class doubleForklift:
         if self.config.state.getState() == 3:
             return
 
-        Thread(self.xlift.moveTo, x, x_speed, wait=Wait).start()
-        Thread(self.ylift.moveTo, y, y_speed, wait=Wait).start()
+        Thread(target=self.xlift.moveTo, args=(
+            x, x_speed), kwargs={"wait": Wait}).start()
+        Thread(target=self.ylift.moveTo, args=(
+            y, y_speed), kwargs={"wait": Wait}).start()
         while Wait and not self.done() and self.config.state.getState() != 3:
             wait(50)
 

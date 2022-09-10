@@ -1,4 +1,5 @@
 from modules.components.drivebase import driveBase
+from modules.components.forklift import forklift
 from modules.components.lightSensor import lightSensor
 from modules.components.runButton import runButton
 from modules.components.runState import runState
@@ -45,6 +46,7 @@ class config:
             self.Llight = lightSensor(ColorSensor(Port.S3))
             self.Rlight = lightSensor(ColorSensor(Port.S4))
 
+            self.lift = forklift(self, self.RMmotor, 11, 40, 8)
             self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 56, 104),
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 

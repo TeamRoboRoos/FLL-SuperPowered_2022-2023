@@ -24,7 +24,8 @@ class forklift:
         else:
             angle = self._limit(angle)
         timer = StopWatch()
-        Thread(self.motor.run_target, speed, angle, then=Stop.HOLD).start()
+        Thread(target=self.motor.run_target, args=(speed, angle),
+               kwargs={"then": Stop.HOLD}).start()
         wait(50)
         while wait > 0 and self.done() == False:
             if timer.time() > Wait:
