@@ -4,8 +4,8 @@ from threading import Thread
 
 
 class forklift:
-    def __init__(self, state, motor, rackLength, rackTeeth, gearTeeth, stallDir=-1, offset=0):
-        self.state = state
+    def __init__(self, config, motor, rackLength, rackTeeth, gearTeeth, stallDir=-1, offset=0):
+        self.config = config
         self.motor = motor
         self.RACKTEETH = rackTeeth
         self.GEARTEETH = gearTeeth
@@ -38,7 +38,7 @@ class forklift:
         self._moveTo(angle+deltaAngle, speed, wait=wait)
 
     def initPos(self, pos=0):
-        if self.state.getState() == 3:
+        if self.config.state.getState() == 3:
             return
 
         self.motor.reset_angle(0)
@@ -55,12 +55,12 @@ class forklift:
         self.motor.stop()
 
     def moveTo(self, dist, speed=400, wait=10000):
-        if self.state.getState() == 3:
+        if self.config.state.getState() == 3:
             return
         self._moveTo(dist*self.RATIO, speed, wait)
 
     def move(self, deltaDist, speed=400, wait=10000):
-        if self.state.getState() == 3:
+        if self.config.state.getState() == 3:
             return
         self._move(deltaDist*self.RATIO, speed, wait)
 
