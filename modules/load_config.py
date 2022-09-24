@@ -78,7 +78,8 @@ class config:
             self.Llight = lightSensor(ColorSensor(Port.S3))
             self.Rlight = lightSensor(ColorSensor(Port.S4))
 
-            self.lift = forklift(self, self.RMmotor, 11, 40, 8)
+            self.lift = forklift(self, Motor(
+                Port.A, gears=[[12, 20], [28, 20], [8, 40]]), 110)
             self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 56, 104),
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 

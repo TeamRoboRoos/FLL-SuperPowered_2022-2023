@@ -4,11 +4,9 @@ from threading import Thread
 
 
 class forklift:
-    def __init__(self, config, motor, rackLength, rackTeeth, gearTeeth, stallDir=-1, offset=0):
+    def __init__(self, config, motor, rackLength, stallDir=-1, offset=0):
         self.config = config
         self.motor = motor
-        self.RACKTEETH = rackTeeth
-        self.GEARTEETH = gearTeeth
         self.STALLDIR = stallDir
         self.RACKLENGTH = rackLength
         self.RATIO = 360/self.RACKLENGTH
@@ -27,7 +25,7 @@ class forklift:
         Thread(target=self.motor.run_target, args=(speed, angle),
                kwargs={"then": Stop.HOLD}).start()
         wait(50)
-        while wait > 0 and self.done() == False:
+        while Wait > 0 and self.done() == False:
             if timer.time() > Wait:
                 self.stop()
                 break
@@ -36,7 +34,7 @@ class forklift:
     def _move(self, deltaAngle, speed, wait=10000):
         # print("move: ", self.motor.angle(), deltaAngle)
         angle = self.motor.angle()
-        self._moveTo(angle+deltaAngle, speed, wait=wait)
+        self._moveTo(angle+deltaAngle, speed, Wait=wait)
 
     def initPos(self, pos=0):
         if self.config.state.getState() == 3:
