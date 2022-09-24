@@ -68,20 +68,20 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "apollo.cal"
 
-            self.Lmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
+            self.Lmotor = Motor(Port.D, Direction.COUNTERCLOCKWISE)
             self.Rmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
             self.LMmotor = Motor(Port.B)
-            self.RMmotor = Motor(Port.D)
+            self.RMmotor = Motor(Port.A)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
-            self.Llight = lightSensor(ColorSensor(Port.S3))
-            self.Rlight = lightSensor(ColorSensor(Port.S4))
+            # self.Llight = lightSensor(ColorSensor(Port.S3))
+            # self.Rlight = lightSensor(ColorSensor(Port.S4))
 
             self.lift = forklift(self, Motor(
                 Port.A, gears=[[12, 20], [28, 20], [8, 40]]), 110)
             self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 56, 104),
-                                   self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
+                                   self.Lmotor, self.Rmotor, self.gyro, self.runButton)  # , Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
                 "runs": [["run1", "run2", "run3"], [run1(self), run2(self), run3(self)]],
