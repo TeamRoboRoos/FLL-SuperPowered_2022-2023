@@ -221,7 +221,7 @@ class driveBase:
 
     # When heading is set to None, moves with current heading
 
-    def moveDist(self, distance, speed=400, heading=None, up=True, down=True, timeout=None):
+    def moveDist(self, distance, speed=400, heading=None, turn=True, up=True, down=True, timeout=None):
         if self.config.state.getState() == 3:
             return
 
@@ -232,7 +232,7 @@ class driveBase:
 
         if heading == None:
             heading = self.getHead()
-        elif abs(self.turnAngle(heading)) > 5:
+        elif turn and abs(self.turnAngle(heading)) > 5:
             self.turnTo(heading)
 
         rampSpeed_max = self.rampSpeed(posDistance, posDistance/2, speed)
