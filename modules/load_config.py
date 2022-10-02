@@ -4,9 +4,8 @@ from modules.components.lightSensor import lightSensor
 from modules.components.runButton import runButton
 from modules.components.runState import runState
 
-from test.run1 import run1
-from test.run2 import run2
-from test.run3 import run3
+from regionals.windmillRun import windmillRun
+from regionals.powerPlantRun import powerPlantRun
 
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
@@ -37,9 +36,9 @@ class config:
             self.LIGHTCAL_CONF = "artemis.cal"
 
             self.Lmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = Motor(Port.B)
-            self.RMmotor = Motor(Port.D)
+            self.Rmotor = Motor(Port.D, Direction.COUNTERCLOCKWISE)
+            self.LMmotor = Motor(Port.C)
+            self.RMmotor = Motor(Port.B)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
@@ -51,7 +50,7 @@ class config:
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
-                "runs": [["run1", "run2", "run3"], [run1(self), run2(self), run3(self)]],
+                "runs": [["powerPlantRun", "windmillRun"], [powerPlantRun(self), windmillRun(self)]],
                 "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
@@ -84,7 +83,7 @@ class config:
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton)  # , Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
-                "runs": [["run1", "run2", "run3"], [run1(self), run2(self), run3(self)]],
+                "runs": [["windmillRun"], [windmillRun(self)]],
                 "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
