@@ -67,10 +67,10 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "apollo.cal"
 
-            self.Lmotor = Motor(Port.D, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = Motor(Port.B)
-            self.RMmotor = Motor(Port.A)
+            self.Lmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
+            self.LMmotor = Motor(Port.A)
+            self.RMmotor = Motor(Port.D)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
@@ -83,7 +83,7 @@ class config:
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton)  # , Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
-                "runs": [["windmillRun"], [windmillRun(self)]],
+                "runs": [["powerPlantRun", "windmillRun"], [powerPlantRun(self), windmillRun(self)]],
                 "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
