@@ -16,6 +16,9 @@ class driveBase:
         self.Llight = Llight
         self.Rlight = Rlight
 
+        if Llight != None and Rlight != None:
+            self.readLightCal()
+
         self.SPEEDLIST = [self.getSpeed(dist)
                           for dist in range(0, config.SPEED_LIST_COUNT)]
 
