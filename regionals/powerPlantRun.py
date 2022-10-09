@@ -9,7 +9,7 @@ class powerPlantRun(Thread):
 
     def run(self):
         self.drive.setHead(-90)
-        self.drive.moveDist(640, 600, heading=-90)
+        self.drive.moveDist(660, 600, heading=-90)
         self.arm.run_angle(-200, 200)
         self.drive.moveDist(-700, 1000, down=False)
         self.arm.stop()
