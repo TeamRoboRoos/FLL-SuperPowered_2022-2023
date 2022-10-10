@@ -37,8 +37,8 @@ class config:
 
             self.Lmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
             self.Rmotor = Motor(Port.D, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = Motor(Port.C)
-            self.RMmotor = Motor(Port.B)
+            self.LMmotor = motor(Port.C)
+            self.RMmotor = motor(Port.B)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
@@ -69,8 +69,8 @@ class config:
 
             self.Lmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
             self.Rmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = Motor(Port.A)
-            self.RMmotor = Motor(Port.D)
+            self.LMmotor = motor(Port.A)
+            self.RMmotor = motor(Port.D)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
