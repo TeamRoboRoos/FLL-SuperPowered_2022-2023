@@ -96,5 +96,7 @@ class menu:
                 self.config.state.setState(self.config.state.stop)
 
             wait(200)
+
+        self.config.stop()
         self.ev3.speaker.beep(frequency=1000, duration=250)
         self.config.state.setState(self.config.state.standby)

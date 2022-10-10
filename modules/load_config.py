@@ -3,6 +3,7 @@ from modules.components.forklift import forklift
 from modules.components.lightSensor import lightSensor
 from modules.components.runButton import runButton
 from modules.components.runState import runState
+from modules.components.motor import motor
 
 from regionals.windmillRun import windmillRun
 from regionals.powerPlantRun import powerPlantRun
@@ -26,6 +27,8 @@ class config:
         self.state = runState()
         self.runButton = None
         self.leftButton = None
+
+        self.stopList = []
 
         if self.name == "artemis":
             self.SPEED_LIST_COUNT = 2000
@@ -54,6 +57,8 @@ class config:
                 "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
+
+            self.stopList = [self.drive, self.lift, self.LMmotor, self.RMmotor]
 
             # self.xlift = forklift(Motor(Port.B))
             # self.ylift = forklift(Motor(Port.C))
@@ -88,6 +93,8 @@ class config:
                 "pages": ["runs", "utility"]
             }
 
+            self.stopList = [self.drive, self.lift, self.LMmotor, self.RMmotor]
+
             # self.xlift = forklift(Motor(Port.B))
             # self.ylift = forklift(Motor(Port.C))
             # self.lift = doubleForklift(self.xlift, self.ylift)
@@ -96,3 +103,7 @@ class config:
             self.ev3.screen.print("Unkown robot\nNo config found")
             while True:
                 wait(100)
+
+    def stop(self):
+        for i in self.stopList:
+            i.stop()
