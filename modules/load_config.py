@@ -40,8 +40,8 @@ class config:
 
             self.Lmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
             self.Rmotor = Motor(Port.D, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = motor(Port.C)
-            self.RMmotor = motor(Port.B)
+            self.LMmotor = motor(self, Port.C)
+            self.RMmotor = motor(self, Port.B)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
@@ -74,8 +74,8 @@ class config:
 
             self.Lmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
             self.Rmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = motor(Port.A)
-            self.RMmotor = motor(Port.D)
+            self.LMmotor = motor(self, Port.A)
+            self.RMmotor = motor(self, Port.D)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
@@ -105,5 +105,5 @@ class config:
                 wait(100)
 
     def stop(self):
-        for i in self.stopList:
-            i.stop()
+        for module in self.stopList:
+            module.stop()

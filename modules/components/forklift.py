@@ -41,7 +41,7 @@ class forklift:
             return
 
         self.motor.reset_angle(0)
-        self.motor.run_until_stalled(200*self.STALLDIR, duty_limit=80)
+        self.motor.run_until_stalled(200*self.STALLDIR, duty_limit=50)
         self.motor.reset_angle(
             self.STALLDIR * (self.RACKLENGTH/2*self.RATIO)+self.OFFSET)
         self.moveTo(pos, 200)
