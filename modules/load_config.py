@@ -79,13 +79,15 @@ class config:
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
-            # self.Llight = lightSensor(ColorSensor(Port.S3))
-            # self.Rlight = lightSensor(ColorSensor(Port.S4))
+            self.Llight = lightSensor(ColorSensor(Port.S3))
+            self.Rlight = lightSensor(ColorSensor(Port.S4))
 
-            self.lift = forklift(self, Motor(
-                Port.A, gears=[[12, 20], [28, 20], [8, 40]]), 110)
+            self.lift = forklift(self, motor(self,
+                                             Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
+            self.leftButton = self.lift.initPos
+
             self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 56, 104),
-                                   self.Lmotor, self.Rmotor, self.gyro, self.runButton)  # , Llight=self.Llight, Rlight=self.Rlight)
+                                   self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
                 "runs": [["powerPlantRun", "windmillRun"], [powerPlantRun(self), windmillRun(self)]],
