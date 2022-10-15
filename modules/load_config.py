@@ -26,7 +26,7 @@ class config:
         self.ev3 = EV3Brick()
         self.state = runState()
         self.runButton = None
-        self.leftButton = None
+        self.menu = {"left": []}
 
         self.stopList = []
 
@@ -54,6 +54,7 @@ class config:
 
             self.menu = {
                 "runs": [["powerPlantRun", "windmillRun"], [powerPlantRun(self), windmillRun(self)]],
+                "left": [self.lift.initPos, None],
                 "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
@@ -91,6 +92,7 @@ class config:
 
             self.menu = {
                 "runs": [["powerPlantRun", "windmillRun"], [powerPlantRun(self), windmillRun(self)]],
+                "left": [self.lift.initPos, None],
                 "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }

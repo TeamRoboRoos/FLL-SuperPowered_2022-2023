@@ -47,8 +47,11 @@ class menu:
                 self.index += 1
                 self.refresh_time = 400
             elif Button.LEFT in button:
-                if self.config.leftButton != None:
+                if self.menu["left"][self.index] != None:
                     self.config.leftButton()
+                else:
+                    print("Nothing assigned")
+                self.refresh_time = 400
             elif Button.RIGHT in button:
                 self.page += 1
                 self.index = 0
