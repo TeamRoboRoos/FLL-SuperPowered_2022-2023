@@ -2,7 +2,7 @@ from modules.components.drivebase import driveBase
 from modules.components.forklift import forklift
 from modules.components.lightSensor import lightSensor
 from modules.components.runButton import runButton
-from modules.components.runState import runState
+from modules.components.tools import runState, timer
 from modules.components.motor import motor
 
 from regionals.windmillRun import windmillRun
@@ -29,6 +29,8 @@ class config:
         self.menu = {"left": []}
 
         self.stopList = []
+
+        self.timer = timer(self)
 
         if self.name == "artemis":
             self.SPEED_LIST_COUNT = 2000
