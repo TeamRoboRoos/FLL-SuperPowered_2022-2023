@@ -24,5 +24,4 @@ class timer(StopWatch):
     def wait(self, time):
         t = super().time()
         while super().time() < time + t and self.state.getState() != 3:
-            print(self.state.getState())
             pass
