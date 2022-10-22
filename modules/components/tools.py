@@ -19,7 +19,6 @@ class runState:
 class timer(StopWatch):
     def __init__(self, config):
         self.state = config.state
-        self.time = StopWatch
 
     def wait(self, time):
         t = super().time()
