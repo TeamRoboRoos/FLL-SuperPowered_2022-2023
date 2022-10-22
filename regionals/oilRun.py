@@ -1,5 +1,6 @@
 from threading import Thread
 
+
 class oilRun(Thread):
     def __init__(self, config):
         self.config = config
@@ -7,4 +8,9 @@ class oilRun(Thread):
         self.wait = config.timer.wait
 
     def run(self):
+        self.drive.setHead()
+
+        self.drive.moveDist(200)
+        self.drive.moveDist(-400)
+
         self.config.state.setState(1)
