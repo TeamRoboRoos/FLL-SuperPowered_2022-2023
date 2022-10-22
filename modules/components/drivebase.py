@@ -88,7 +88,7 @@ class driveBase:
         if distance == None:
             curr_distance = abs(self.drive.distance())
             while True:
-                if self.state == 3:
+                if self.config.state.getState() == 3:
                     break
                 if mode == 2:
                     if self.Llight.readLight() > 80:
