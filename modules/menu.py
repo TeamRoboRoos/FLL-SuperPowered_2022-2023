@@ -1,5 +1,5 @@
 from pybricks.media.ev3dev import Font
-from pybricks.parameters import Button
+from pybricks.parameters import Button, Color
 from pybricks.tools import StopWatch, wait
 
 
@@ -19,6 +19,8 @@ class menu:
 
         font = Font("Terminal", 16, monospace=True)
         self.ev3.screen.set_font(font)
+
+        self.ev3.light.on(Color.RED)
 
         if self.ev3.battery.voltage() < 8100:
             self.ev3.speaker.beep(1500, 2000)
@@ -85,6 +87,7 @@ class menu:
         self.config.state.setState(self.config.state.running)
 
         func.start()
+        self.ev3.light.on(Color.GREEN)
 
         # Wait for 2 seconds or until run button is released
         timer = StopWatch()
@@ -102,4 +105,5 @@ class menu:
 
         self.config.stop()
         self.ev3.speaker.beep(frequency=1000, duration=250)
+        self.ev3.light.on(Color.RED)
         self.config.state.setState(self.config.state.standby)
