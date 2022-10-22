@@ -4,15 +4,19 @@ from modules.load_config import config
 from modules.menu import menu
 
 
+# Initialise config and main menu
 config = config()
 
-menu = menu(config, False)
+menu = menu(config, True)
 print("Started")
 
+# Run menu loop
 try:
     while True:
         menu.update()
 except KeyboardInterrupt:
+    # Effectively changes namespace to config
+    # eg. config.drive.turnTo becomes drive.turnTo
     config.stop()
     contents = dir(config)
     for i in range(0, len(contents)):

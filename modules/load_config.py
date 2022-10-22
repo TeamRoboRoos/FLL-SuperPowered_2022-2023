@@ -19,8 +19,10 @@ from pybricks.media.ev3dev import Font, SoundFile, ImageFile
 from os import popen
 
 
+# Holds information for one or more robots
 class config:
     def __init__(self):
+        # Gets hostname to identify robot
         self.name = popen('hostname').read().strip()
 
         self.ev3 = EV3Brick()
@@ -32,6 +34,7 @@ class config:
 
         self.timer = timer(self)
 
+        # Define all robots beneath
         if self.name == "artemis":
             self.SPEED_LIST_COUNT = 2000
             self.ACCELERATION = 250

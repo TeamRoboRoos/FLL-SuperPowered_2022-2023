@@ -4,6 +4,7 @@ from pybricks.parameters import Button, Stop
 from pybricks.tools import StopWatch, wait
 
 
+# Contains many functions for the drivebase
 class driveBase:
     def __init__(self, config, drive, Lmotor, Rmotor, gyro, runButton=None, Llight=None, Rlight=None):
         self.drive = drive
@@ -25,9 +26,11 @@ class driveBase:
     def getSpeed(self, distance):
         return round(math.sqrt(distance*2*self.config.ACCELERATION + self.config.STARTSPEED**2))
 
+    # Gets current heading
     def getHead(self):
         return (self.gyro.angle() + 180) % 360 - 180
 
+    # Sets current heading
     def setHead(self, angle=0):
         self.gyro.reset_angle(angle)
 
@@ -37,6 +40,7 @@ class driveBase:
     def limit(self, input, bound):
         return max(min(input, bound[1]), bound[0])
 
+    # Checks if gyro reading has changed within timeout seconds
     def gyroDrift(self, timeout=20000):
         timer = StopWatch()
         heading = self.getHead()
@@ -47,6 +51,7 @@ class driveBase:
             wait(100)
         self.ev3.speaker.beep(1000, 200)
 
+    # Runs the wheel at a constant speed
     def tyreClean(self):
         self.drive.drive(200, 0)
         wait(1000)
@@ -128,7 +133,7 @@ class driveBase:
                     error = self.Llight.readLight() - self.Rlight.readLight()
                 elif mode == 1:
                     error = 60 - self.Llight.readLight()
-                elif mode == 2:
+                else:
                     error = self.Rlight.readLight() - 60
 
                 derivative = error - lastError
@@ -272,6 +277,7 @@ class driveBase:
         #     f.write("{}, {}".format(line[0], line[1]))
         #     f.write("\n")
 
+    # Moves robot along the radius of a circle
     def moveArc(self, radius, heading, speed=100, timeout=10000):
         if self.config.state.getState() == 3:
             return
@@ -289,6 +295,7 @@ class driveBase:
         # wait(1000)
         # print(tolerance, st_heading, "->", self.getHead(), ":", self.getHead() - st_heading)
 
+    # Turns the robot to a given heading
     def turnTo(self, heading, tolerance=2, timeout=4000):
         if self.config.state.getState() == 3:
             return
@@ -303,6 +310,7 @@ class driveBase:
         self.stop()
         # print(heading, self.getHead(), range(-tolerance, tolerance))
 
+    # Turns quickly first, then uses turnTo for more accuracy
     def spinTo(self, heading, tolerance=2, timeout=4000):
         if self.config.state.getState() == 3:
             return
@@ -329,6 +337,7 @@ class driveBase:
                 self.drive.drive(50, self.turnAngle(heading))
         self.stop()
 
+    # Moves forward until given lightsensor value is with the limits
     def moveLight(self, sensor, limits, heading=None, timeout=10000):
         if self.config.state.getState() == 3:
             return
@@ -345,6 +354,7 @@ class driveBase:
             self.drive.drive(80, self.turnAngle(heading))
         self.stop()
 
+    # Moves until wheels have stalled
     def moveStall(self, duty=30, heading=None, speed=-200, timeout=10000):
         if self.config.state.getState() == 3:
             return

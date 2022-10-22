@@ -3,6 +3,7 @@ from pybricks.parameters import Direction, Stop
 import pybricks.tools
 
 
+# Wrapper class for motor to allow for run to stop without quiting program
 class motor():
     def __init__(self, config, port,
                  positive_direction=Direction.CLOCKWISE,

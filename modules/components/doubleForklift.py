@@ -3,6 +3,7 @@ from threading import Thread
 from pybricks.tools import wait
 
 
+# Class contains two forklifts
 class doubleForklift:
     def __init__(self, config, xlift, ylift):
         self.config = config
@@ -22,7 +23,7 @@ class doubleForklift:
 
         if ypos == None:
             ypos = -self.ylift.RACKLENGTH/2
-        Thread(target=self.xlift.initPos, args=(xpos)).start()
+        Thread(target=self.xlift.initPos, args=(xpos)).start()  # type: ignore
         Thread(target=self.ylift.initPos, args=(ypos)).start()
         wait(50)
         while self.done() == False and Wait > 0:

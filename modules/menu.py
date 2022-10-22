@@ -3,71 +3,103 @@ from pybricks.parameters import Button, Color
 from pybricks.tools import StopWatch, wait
 
 
+# Class to control running runs
 class menu:
     index = 0
     page = 0
     refresh_time = 100
 
     def __init__(self, config, quiet):
+        # If sound gets too annoying
         self.ev3 = config.ev3
         if quiet:
             self.ev3.speaker.set_volume(0)
+
+        # Gets menu data from config
         self.menu = config.menu
         self.pages = config.menu["pages"]
         del config.menu["pages"]
+
+        # Gets configuration
         self.config = config
 
+        # Sets up font for menu
         font = Font("Terminal", 16, monospace=True)
         self.ev3.screen.set_font(font)
 
+        # Change status light to standby
         self.ev3.light.on(Color.RED)
 
+        # If battery level too low, give a longer beep
         if self.ev3.battery.voltage() < 8100:
             self.ev3.speaker.beep(1500, 2000)
         else:
             self.ev3.speaker.beep(frequency=1000, duration=100)
 
+    # Main control loop
+    # Handles button presses
     def update(self):
+        # Makes sure index is within bounds of menu
         self.page = self.wrap_index(self.page, self.pages)
         self.index = self.wrap_index(
             self.index, self.menu[self.pages[self.page]][0])
+
+        # Displays all data
         self.displayMenu(self.index, self.page)
 
+        # Makes sure no button is pressed twice
         wait(self.refresh_time)
         self.refresh_time = 100
 
+        # Gets buttons that are pressed
         button = self.ev3.buttons.pressed()
+
+        # Makes sure only one button is pressed
         if len(button) == 1:
+            # If middle button, run the run selected
             if Button.CENTER in button:
                 self.run(self.menu[self.pages[self.page]]
                          [1][self.index], isRun=self.page == 0)
-                self.index += 1
+                self.index += 1  # At end of run, move to next run
+
+            # Moves up in the menu
             elif Button.UP in button:
                 self.index -= 1
                 self.refresh_time = 400
+
+            # Moves down in menu
             elif Button.DOWN in button:
                 self.index += 1
                 self.refresh_time = 400
+
+            # Each run has a corresponding function that can be run through the
+            # left button
             elif Button.LEFT in button:
                 if self.menu["left"][self.index] != None:
                     self.menu["left"][self.index]()
                 else:
                     print("Nothing assigned")
                 self.refresh_time = 400
+
+            # Switch pages
             elif Button.RIGHT in button:
                 self.page += 1
                 self.index = 0
                 self.refresh_time = 400
+
+        # If no buttons are press, check if runButton exists and is pressed
+        # If true, run the run too
         elif self.config.runButton != None and self.config.runButton.pressed() == True:
             self.run(self.menu[self.pages[self.page]]
                      [1][self.index], isRun=self.page == 0)
-            self.index += 1
+            self.index += 1  # At end of run, move to next run
 
     def wrap_index(self, idx, theList):
         if idx < 0 or idx >= len(theList):
             idx = 0
         return idx
 
+    # Displays all information on screen
     def displayMenu(self, curr_index, pageIdx):
         self.ev3.screen.clear()
         for item in self.menu[self.pages[pageIdx]][0]:
@@ -78,6 +110,7 @@ class menu:
         self.ev3.screen.print(
             self.config.name, ":", self.ev3.battery.voltage(), end="")
 
+    # Runs given run
     def run(self, func, isRun=True):
         self.ev3.speaker.beep(frequency=1000, duration=250)
 
@@ -86,7 +119,10 @@ class menu:
 
         self.config.state.setState(self.config.state.running)
 
+        # Start run in another thread (in parallel)
         func.start()
+
+        # Update status light
         self.ev3.light.on(Color.GREEN)
 
         # Wait for 2 seconds or until run button is released
@@ -103,6 +139,7 @@ class menu:
 
             wait(200)
 
+        # Reset
         self.config.stop()
         self.ev3.speaker.beep(frequency=1000, duration=250)
         self.ev3.light.on(Color.RED)

@@ -3,6 +3,7 @@ from pybricks.tools import StopWatch, wait
 from threading import Thread
 
 
+# Class to control forklifts
 class forklift:
     def __init__(self, config, motor, rackLength, stallDir=-1, offset=0):
         self.config = config
