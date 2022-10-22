@@ -19,30 +19,30 @@ class windmillRun(Thread):
         self.drive.turnTo(45)
 
         # Push the windmill three times
-        self.drive.moveDist(80, heading=45)
+        self.drive.moveDist(80)
         self.wait(500)
-        self.drive.moveDist(-50, heading=45)
+        self.drive.moveDist(-50)
         self.wait(800)
-        self.drive.moveDist(80, heading=45)
+        self.drive.moveDist(80)
         self.wait(500)
-        self.drive.moveDist(-50, heading=45)
+        self.drive.moveDist(-50)
         self.wait(800)
-        self.drive.moveDist(80, heading=45)
+        self.drive.moveDist(80)
         self.wait(500)
-        self.drive.moveDist(-50, heading=45)
+        self.drive.moveDist(-50)
         self.drive.setHead(45)
 
-        self.drive.moveDist(-170)
-        self.drive.turnTo(-45)
+        self.drive.moveDist(-180, heading=45)
+        self.drive.turnTo(-40)
 
         # In place for the car
-        self.drive.moveDist(293, heading=-45)
-        self.flipper.run_angle(900, 530)
+        self.drive.moveDist(293, heading=-40)
+        self.flipper.run_angle(900, 500)
         self.flipper.stop()
-        self.flipper.run_angle(-900, 530)
+        self.flipper.run_angle(-900, 500)
         self.flipper.stop()
 
         # Grabs the rechargable battery and goes home
-        self.drive.moveDist(-1100)
+        self.drive.moveDist(-1100, heading=-45)
 
         self.config.state.setState(1)
