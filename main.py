@@ -7,7 +7,7 @@ from modules.menu import menu
 # Initialise config and main menu
 config = config()
 
-menu = menu(config, True)
+menu = menu(config, 20)
 print("Started")
 
 # Run menu loop

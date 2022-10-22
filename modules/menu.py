@@ -9,11 +9,10 @@ class menu:
     page = 0
     refresh_time = 100
 
-    def __init__(self, config, quiet):
+    def __init__(self, config, volume):
         # If sound gets too annoying
         self.ev3 = config.ev3
-        if quiet:
-            self.ev3.speaker.set_volume(0)
+        self.ev3.speaker.set_volume(volume)
 
         # Gets menu data from config
         self.menu = config.menu
