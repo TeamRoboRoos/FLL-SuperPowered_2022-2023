@@ -92,9 +92,8 @@ class config:
             self.Llight = lightSensor(ColorSensor(Port.S3))
             self.Rlight = lightSensor(ColorSensor(Port.S4))
 
-            self.lift = forklift(self, motor(self,
-                                             Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
-            self.leftButton = self.lift.initPos
+            # self.lift = forklift(self, motor(self,
+            #                                  Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
 
             self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 56, 104),
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
@@ -106,7 +105,7 @@ class config:
                 "pages": ["runs", "utility"]
             }
 
-            self.stopList = [self.drive, self.lift, self.LMmotor, self.RMmotor]
+            self.stopList = [self.drive, self.LMmotor, self.RMmotor]
 
             # self.xlift = forklift(Motor(Port.B))
             # self.ylift = forklift(Motor(Port.C))
