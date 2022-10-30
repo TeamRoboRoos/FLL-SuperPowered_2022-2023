@@ -105,7 +105,7 @@ class menu:
         self.ev3.screen.clear()
         count = 0
         if floor(curr_index / self.max_items) * self.max_items > 0:
-            self.ev3.screen.print(" ...")
+            self.ev3.screen.print("  ...")
 
         for item in self.menu[self.pages[pageIdx]][0]:
             count += 1
@@ -118,7 +118,7 @@ class menu:
                 self.ev3.screen.print(" ", item)
 
             if count >= floor(curr_index / self.max_items) * self.max_items + self.max_items:
-                self.ev3.screen.print(" ...")
+                self.ev3.screen.print("  ...")
                 break
 
         self.ev3.screen.print(
