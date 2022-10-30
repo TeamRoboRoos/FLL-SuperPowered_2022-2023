@@ -96,13 +96,13 @@ class driveBase:
                 if self.config.state.getState() == 3:
                     break
                 if mode == 2:
-                    if self.Llight.readLight() > 80:
+                    if self.Llight.readLight() > 90:
                         next = True
                     elif self.Llight.readLight() < 5 and next == True:
                         break
                     error = self.Rlight.readLight() - 60
                 else:
-                    if self.Rlight.readLight() > 80:
+                    if self.Rlight.readLight() > 90:
                         next = True
                     elif self.Rlight.readLight() < 5 and next == True:
                         break
