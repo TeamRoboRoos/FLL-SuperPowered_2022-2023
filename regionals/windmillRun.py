@@ -33,10 +33,10 @@ class windmillRun(Thread):
         self.drive.setHead(45)
 
         self.drive.moveDist(-180, heading=45)
-        self.drive.turnTo(-40)
+        self.drive.turnTo(-45)
 
         # In place for the car
-        self.drive.moveDist(293, heading=-40)
+        self.drive.moveDist(293, heading=-45)
         self.flipper.run_angle(900, 500)
         self.flipper.stop()
         self.flipper.run_angle(-900, 500)
