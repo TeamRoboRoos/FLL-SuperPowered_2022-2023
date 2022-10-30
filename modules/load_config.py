@@ -82,10 +82,8 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "apollo.cal"
 
-            self.Lmotor = Motor(
-                Port.B, Direction.COUNTERCLOCKWISE, gears=[28, 20])
-            self.Rmotor = Motor(
-                Port.A, Direction.COUNTERCLOCKWISE, gears=[28, 20])
+            self.Lmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
             self.LMmotor = motor(self, Port.C)
             self.RMmotor = motor(self, Port.D)
 
