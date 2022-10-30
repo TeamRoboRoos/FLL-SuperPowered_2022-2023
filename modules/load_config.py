@@ -45,10 +45,10 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "artemis.cal"
 
-            self.Lmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = Motor(Port.D, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = motor(self, Port.C)
-            self.RMmotor = motor(self, Port.B)
+            self.Lmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
+            self.LMmotor = motor(self, Port.A)
+            self.RMmotor = motor(self, Port.D)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
