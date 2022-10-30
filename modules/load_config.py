@@ -9,6 +9,8 @@ from regionals.windmillRun import windmillRun
 from regionals.powerPlantRun import powerPlantRun
 from regionals.solarRun import solarRun
 from regionals.oilRun import oilRun
+from regionals.hydroRun import hydroRun
+from regionals.toyRun import toyRun
 
 from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
@@ -60,8 +62,8 @@ class config:
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
-                "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self)]],
-                "left": [None, None, None, None],
+                "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
+                "left": [None, None, None, None, None, None],
                 "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
@@ -99,8 +101,8 @@ class config:
                                    self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
-                "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self)]],
-                "left": [None, None, None, None],
+                "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
+                "left": [None, None, None, None, None, None],
                 "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
