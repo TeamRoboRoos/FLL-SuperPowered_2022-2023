@@ -13,10 +13,10 @@ class windmillRun(Thread):
 
         self.drive.moveDist(590, heading=0)  # Hits the TV
         self.drive.moveDist(-80, heading=0, turn=False)
-        self.drive.turnTo(-45)
+        self.drive.spinTo(-45)
         self.drive.moveLight(self.config.Rlight, [0, 10], heading=-40)
         self.drive.moveDist(140, heading=-40)
-        self.drive.turnTo(45)
+        self.drive.spinTo(45)
 
         # Push the windmill three times
         self.drive.moveDist(80)
@@ -33,7 +33,7 @@ class windmillRun(Thread):
         self.drive.setHead(45)
 
         self.drive.moveDist(-180, heading=45)
-        self.drive.turnTo(-45)
+        self.drive.spinTo(-45)
 
         # In place for the car
         self.drive.moveDist(293, heading=-45)
