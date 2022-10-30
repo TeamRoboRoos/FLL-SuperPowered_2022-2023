@@ -83,10 +83,10 @@ class config:
             self.LIGHTCAL_CONF = "apollo.cal"
 
             self.Lmotor = Motor(
-                Port.C, Direction.COUNTERCLOCKWISE, gears=[28, 20])
-            self.Rmotor = Motor(
                 Port.B, Direction.COUNTERCLOCKWISE, gears=[28, 20])
-            self.LMmotor = motor(self, Port.A)
+            self.Rmotor = Motor(
+                Port.A, Direction.COUNTERCLOCKWISE, gears=[28, 20])
+            self.LMmotor = motor(self, Port.C)
             self.RMmotor = motor(self, Port.D)
 
             # self.runButton = runButton(TouchSensor(Port))
