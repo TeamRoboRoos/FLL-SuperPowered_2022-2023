@@ -1,3 +1,4 @@
+from math import ceil, floor
 from pybricks.media.ev3dev import Font
 from pybricks.parameters import Button, Color
 from pybricks.tools import StopWatch, wait
@@ -8,6 +9,7 @@ class menu:
     index = 0
     page = 0
     refresh_time = 100
+    max_items = 4
 
     def __init__(self, config, volume):
         # If sound gets too annoying
@@ -101,11 +103,24 @@ class menu:
     # Displays all information on screen
     def displayMenu(self, curr_index, pageIdx):
         self.ev3.screen.clear()
+        count = 0
+        if floor(curr_index / self.max_items) * self.max_items > 0:
+            self.ev3.screen.print(" ...")
+
         for item in self.menu[self.pages[pageIdx]][0]:
+            count += 1
+            if count <= floor(curr_index / self.max_items) * self.max_items:
+                continue
+
             if self.menu[self.pages[pageIdx]][0].index(item) == curr_index:
                 self.ev3.screen.print(">", item)
             else:
                 self.ev3.screen.print(" ", item)
+
+            if count >= floor(curr_index / self.max_items) * self.max_items + self.max_items:
+                self.ev3.screen.print(" ...")
+                break
+
         self.ev3.screen.print(
             self.config.name, ":", self.ev3.battery.voltage(), end="")
 
