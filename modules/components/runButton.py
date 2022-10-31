@@ -1,4 +1,4 @@
-class runButton:
+class RunButton:
     def __init__(self, button):
         self.button = button
 
