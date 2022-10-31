@@ -44,9 +44,8 @@ class driveBase:
     def gyroDrift(self, timeout=20000):
         timer = StopWatch()
         heading = self.getHead()
-        while timer.time() < timeout:
+        while timer.time() < timeout and self.config.state.getState() != 3:
             if self.turnAngle(heading) != 0:
-                self.ev3.speaker.beep(frequency=800, duration=2000)
                 break
             wait(100)
         self.ev3.speaker.beep(1000, 200)
@@ -54,11 +53,9 @@ class driveBase:
     # Runs the wheel at a constant speed
     def tyreClean(self):
         self.drive.drive(200, 0)
-        wait(1000)
-        while (self.runButton != None and self.runButton.pressed() != True) or not Button.CENTER in self.ev3.buttons.pressed():
+        while self.config.state.getState() != 3:
             wait(50)
         self.drive.stop()
-        wait(1000)
 
     """ Sensor modes
     0 - Two sensor mode
@@ -154,13 +151,12 @@ class driveBase:
     # colorsensor
 
     def lightCal(self):
-        if self.config.state.getState() == 3:
-            return
-
         Lmax = 0
         Rmax = 0
         Lmin = 100
         Rmin = 100
+        cancel = False
+
         self.drive.reset()
         self.drive.drive(50, 0)
         while self.drive.distance() < 100:
@@ -168,16 +164,20 @@ class driveBase:
             Rmax = max(self.Rlight.sensor.reflection(), Rmax)
             Lmin = min(self.Llight.sensor.reflection(), Lmin)
             Rmin = min(self.Rlight.sensor.reflection(), Rmin)
+            if self.config.state.getState() == 3:
+                cancel = True
+                break
 
-        with open(self.config.LIGHTCAL_CONF, "w") as f:
-            f.write(str(Lmax) + ",")
-            f.write(str(Lmin) + ",")
-            f.write(str(Rmax) + ",")
-            f.write(str(Rmin) + ",")
-        self.Llight.setCalValues(Lmin, Lmax)
-        self.Rlight.setCalValues(Rmin, Rmax)
+        if not cancel:
+            with open(self.config.LIGHTCAL_CONF, "w") as f:
+                f.write(str(Lmax) + ",")
+                f.write(str(Lmin) + ",")
+                f.write(str(Rmax) + ",")
+                f.write(str(Rmin) + ",")
+            self.Llight.setCalValues(Lmin, Lmax)
+            self.Rlight.setCalValues(Rmin, Rmax)
+            print("Llight %2i:%2i Rlight %2i:%2i" % (Lmin, Lmax, Rmin, Rmax))
         self.drive.stop()
-        print("Llight %2i:%2i Rlight %2i:%2i" % (Lmin, Lmax, Rmin, Rmax))
 
     # Read light calibration values from file and set it through the \
     # light_sensor class
