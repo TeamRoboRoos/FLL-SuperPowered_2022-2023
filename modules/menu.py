@@ -22,23 +22,19 @@ class menu:
         self.config = config
 
         # Gets menu data from config
-        self.tempMenu = config.menu
+        tempMenu = config.menu
         self.pages = config.menu["pages"]
         del config.menu["pages"]
 
-        print(self.tempMenu)
-
         self.menu = {}
 
-        self.menu["runs"] = self.tempMenu["runs"]
-        self.menu["left"] = self.tempMenu["left"]
+        self.menu["runs"] = tempMenu["runs"]
+        self.menu["left"] = tempMenu["left"]
 
         for page in self.pages:
             if page != "runs" and page != "left":
-                temp = [runify(func, self.config) for func in self.tempMenu[page][1]]
-                self.menu[page] = [self.tempMenu[page][0], temp]  # type: ignore
-
-        print(self.menu)
+                temp = [runify(func, self.config) for func in tempMenu[page][1]]
+                self.menu[page] = [tempMenu[page][0], temp]  # type: ignore
 
         # Sets up font for menu
         font = Font("Terminal", 16, monospace=True)
