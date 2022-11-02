@@ -48,8 +48,8 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "artemis.cal"
 
-            self.Lmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
+            self.Lmotor = Motor(self, Port.B, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = Motor(self, Port.C, Direction.COUNTERCLOCKWISE)
             self.LMmotor = Motor(self, Port.A)
             self.RMmotor = Motor(self, Port.D)
 
@@ -59,7 +59,8 @@ class config:
             self.Rlight = LightSensor(Port.S4)
 
             self.lift = Forklift(self, self.RMmotor, 11, 40, 8)
-            self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro, 56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
+            self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro,
+                                       56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
                 "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
@@ -82,8 +83,8 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "apollo.cal"
 
-            self.Lmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
+            self.Lmotor = Motor(self, Port.B, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = Motor(self, Port.A, Direction.COUNTERCLOCKWISE)
             self.LMmotor = Motor(self, Port.C)
             self.RMmotor = Motor(self, Port.D)
 
@@ -95,7 +96,8 @@ class config:
             # self.lift = forklift(self, motor(self,
             #                                  Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
 
-            self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro, 56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
+            self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro,
+                                       56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
                 "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],

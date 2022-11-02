@@ -8,7 +8,7 @@ from pybricks.tools import StopWatch, wait
 # Contains many functions for the drivebase
 class DriveBaseFull:
     def __init__(self, config, Lmotor, Rmotor, gyro, diameter, track, runButton=None, Llight=None, Rlight=None):
-        self.drive = DriveBase(Lmotor, Rmotor, diameter, track)
+        self.drive = DriveBase(Lmotor.m, Rmotor.m, diameter, track)
         self.gyro = gyro
         self.ev3 = config.ev3
         self.runButton = runButton
