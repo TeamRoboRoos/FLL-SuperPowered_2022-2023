@@ -1,4 +1,6 @@
-from math import ceil, floor
+from math import floor
+from modules.runify import runify
+from threading import Thread
 from pybricks.media.ev3dev import Font
 from pybricks.parameters import Button, Color
 from pybricks.tools import StopWatch, wait
@@ -16,13 +18,23 @@ class menu:
         self.ev3 = config.ev3
         self.ev3.speaker.set_volume(volume)
 
+        # Gets configuration
+        self.config = config
+
         # Gets menu data from config
-        self.menu = config.menu
+        tempMenu = config.menu
         self.pages = config.menu["pages"]
         del config.menu["pages"]
 
-        # Gets configuration
-        self.config = config
+        self.menu = {}
+
+        self.menu["runs"] = tempMenu["runs"]
+        self.menu["left"] = tempMenu["left"]
+
+        for page in self.pages:
+            if page != "runs" and page != "left":
+                temp = [runify(func, self.config) for func in tempMenu[page][1]]
+                self.menu[page] = [tempMenu[page][0], temp]  # type: ignore
 
         # Sets up font for menu
         font = Font("Terminal", 16, monospace=True)
@@ -32,10 +44,13 @@ class menu:
         self.ev3.light.on(Color.RED)
 
         # If battery level too low, give a longer beep
+
         if self.ev3.battery.voltage() < 8100:
-            self.ev3.speaker.beep(1500, 2000)
+            Thread(target=self.ev3.speaker.beep, args=[1500, 2000]).start()
+            # self.ev3.speaker.beep(1500, 2000)
         else:
-            self.ev3.speaker.beep(frequency=1000, duration=100)
+            Thread(target=self.ev3.speaker.beep, args=[1000, 100]).start()
+            # self.ev3.speaker.beep(frequency=1000, duration=100)
 
     # Main control loop
     # Handles button presses
@@ -60,7 +75,7 @@ class menu:
             # If middle button, run the run selected
             if Button.CENTER in button:
                 self.run(self.menu[self.pages[self.page]]
-                         [1][self.index], isRun=self.page == 0)
+                         [1][self.index])
                 self.index += 1  # At end of run, move to next run
 
             # Moves up in the menu
@@ -92,7 +107,7 @@ class menu:
         # If true, run the run too
         elif self.config.runButton != None and self.config.runButton.pressed() == True:
             self.run(self.menu[self.pages[self.page]]
-                     [1][self.index], isRun=self.page == 0)
+                     [1][self.index])
             self.index += 1  # At end of run, move to next run
 
     def wrap_index(self, idx, theList):
@@ -125,11 +140,8 @@ class menu:
             self.config.name, ":", self.ev3.battery.voltage(), end="")
 
     # Runs given run
-    def run(self, func, isRun=True):
+    def run(self, func):
         self.ev3.speaker.beep(frequency=1000, duration=250)
-
-        if isRun == False:
-            return func()
 
         self.config.state.setState(self.config.state.running)
 
@@ -157,4 +169,5 @@ class menu:
         self.config.stop()
         self.ev3.speaker.beep(frequency=1000, duration=250)
         self.ev3.light.on(Color.RED)
+        print("Run Took:", timer.time(), "s")
         self.config.state.setState(self.config.state.standby)
