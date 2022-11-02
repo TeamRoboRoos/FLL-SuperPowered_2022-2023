@@ -1,9 +1,18 @@
-from modules.components.drivebase import driveBase
-from modules.components.forklift import forklift
-from modules.components.lightSensor import lightSensor
-from modules.components.runButton import runButton
-from modules.components.tools import runState, timer
-from modules.components.motor import motor
+from pybricks.hubs import EV3Brick
+# from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
+#                                  InfraredSensor, UltrasonicSensor, GyroSensor)
+from pybricks.parameters import Port, Stop, Direction, Button, Color
+from pybricks.tools import wait, StopWatch, DataLog
+from pybricks.robotics import DriveBase
+from pybricks.media.ev3dev import Font, SoundFile, ImageFile
+
+from modules.components.drivebase import DriveBaseFull
+from modules.components.forklift import Forklift
+from modules.components.lightSensor import LightSensor
+from modules.components.runButton import RunButton
+from modules.components.gyro import GyroSensor
+from modules.components.tools import RunState, Timer
+from modules.components.motor import Motor
 
 from regionals.windmillRun import windmillRun
 from regionals.powerPlantRun import powerPlantRun
@@ -11,14 +20,6 @@ from regionals.solarRun import solarRun
 from regionals.oilRun import oilRun
 from regionals.hydroRun import hydroRun
 from regionals.toyRun import toyRun
-
-from pybricks.hubs import EV3Brick
-from pybricks.ev3devices import (Motor, TouchSensor, ColorSensor,
-                                 InfraredSensor, UltrasonicSensor, GyroSensor)
-from pybricks.parameters import Port, Stop, Direction, Button, Color
-from pybricks.tools import wait, StopWatch, DataLog
-from pybricks.robotics import DriveBase
-from pybricks.media.ev3dev import Font, SoundFile, ImageFile
 
 from os import popen
 
@@ -30,13 +31,13 @@ class config:
         self.name = popen('hostname').read().strip()
 
         self.ev3 = EV3Brick()
-        self.state = runState()
+        self.state = RunState()
         self.runButton = None
         self.menu = {"left": []}
 
         self.stopList = []
 
-        self.timer = timer(self)
+        self.timer = Timer(self)
 
         # Define all robots beneath
         if self.name == "artemis":
@@ -49,17 +50,16 @@ class config:
 
             self.Lmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
             self.Rmotor = Motor(Port.C, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = motor(self, Port.A)
-            self.RMmotor = motor(self, Port.D)
+            self.LMmotor = Motor(self, Port.A)
+            self.RMmotor = Motor(self, Port.D)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
-            self.Llight = lightSensor(ColorSensor(Port.S3))
-            self.Rlight = lightSensor(ColorSensor(Port.S4))
+            self.Llight = LightSensor(Port.S3)
+            self.Rlight = LightSensor(Port.S4)
 
-            self.lift = forklift(self, self.RMmotor, 11, 40, 8)
-            self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 56, 104),
-                                   self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
+            self.lift = Forklift(self, self.RMmotor, 11, 40, 8)
+            self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro, 56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
                 "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
@@ -84,19 +84,18 @@ class config:
 
             self.Lmotor = Motor(Port.B, Direction.COUNTERCLOCKWISE)
             self.Rmotor = Motor(Port.A, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = motor(self, Port.C)
-            self.RMmotor = motor(self, Port.D)
+            self.LMmotor = Motor(self, Port.C)
+            self.RMmotor = Motor(self, Port.D)
 
             # self.runButton = runButton(TouchSensor(Port))
             self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
-            self.Llight = lightSensor(ColorSensor(Port.S3))
-            self.Rlight = lightSensor(ColorSensor(Port.S4))
+            self.Llight = LightSensor(Port.S3)
+            self.Rlight = LightSensor(Port.S4)
 
             # self.lift = forklift(self, motor(self,
             #                                  Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
 
-            self.drive = driveBase(self, DriveBase(self.Lmotor, self.Rmotor, 56, 104),
-                                   self.Lmotor, self.Rmotor, self.gyro, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
+            self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro, 56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
                 "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],

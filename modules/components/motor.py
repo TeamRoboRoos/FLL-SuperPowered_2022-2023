@@ -1,16 +1,16 @@
-from pybricks.ev3devices import Motor
+from pybricks import ev3devices
 from pybricks.parameters import Direction, Stop
 import pybricks.tools
 
 
 # Wrapper class for motor to allow for run to stop without quiting program
-class motor():
+class Motor():
     def __init__(self, config, port,
                  positive_direction=Direction.CLOCKWISE,
                  gears=None):
         self.config = config
-        self.m = Motor(port, positive_direction=positive_direction,
-                       gears=gears)
+        self.m = ev3devices.Motor(port, positive_direction=positive_direction,
+                                  gears=gears)
         self.control = self.m.control
 
     def angle(self):

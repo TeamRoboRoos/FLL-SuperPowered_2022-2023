@@ -1,13 +1,14 @@
 import math
 from threading import Thread
 from pybricks.parameters import Button, Stop
+from pybricks.robotics import DriveBase
 from pybricks.tools import StopWatch, wait
 
 
 # Contains many functions for the drivebase
-class driveBase:
-    def __init__(self, config, drive, Lmotor, Rmotor, gyro, runButton=None, Llight=None, Rlight=None):
-        self.drive = drive
+class DriveBaseFull:
+    def __init__(self, config, Lmotor, Rmotor, gyro, diameter, track, runButton=None, Llight=None, Rlight=None):
+        self.drive = DriveBase(Lmotor, Rmotor, diameter, track)
         self.gyro = gyro
         self.ev3 = config.ev3
         self.runButton = runButton

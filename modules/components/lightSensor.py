@@ -1,8 +1,10 @@
+from pybricks.ev3devices import ColorSensor
+
 # Wrapper class for colorsensor
 # Allows for calibration of lightsensor
-class lightSensor:
-    def __init__(self, sensor):
-        self.sensor = sensor
+class LightSensor:
+    def __init__(self, port):
+        self.sensor = ColorSensor(port)
         self.min = 0
         self.max = 100
 

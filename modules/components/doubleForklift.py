@@ -4,7 +4,7 @@ from pybricks.tools import wait
 
 
 # Class contains two forklifts
-class doubleForklift:
+class DoubleForklift:
     def __init__(self, config, xlift, ylift):
         self.config = config
         self.xlift = xlift

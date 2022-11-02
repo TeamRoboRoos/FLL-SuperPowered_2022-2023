@@ -1,7 +1,7 @@
 from pybricks.ev3devices import GyroSensor
 from threading import Thread
 
-class gyroSensor(GyroSensor):
+class Gyro(GyroSensor):
     cal = 0
     ang = 0
 

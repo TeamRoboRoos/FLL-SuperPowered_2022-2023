@@ -3,7 +3,7 @@ from pybricks.tools import StopWatch
 
 # Holds state of robot
 # Is necessary to stop robot without exiting program
-class runState:
+class RunState:
     running = 0
     standby = 1
     stop = 3
@@ -20,7 +20,7 @@ class runState:
 
 # Wrapper class for timer to allow for a wait function that will skip itself
 # if robot state is in stop
-class timer(StopWatch):
+class Timer(StopWatch):
     def __init__(self, config):
         self.state = config.state
 
