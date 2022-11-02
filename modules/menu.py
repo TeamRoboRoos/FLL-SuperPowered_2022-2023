@@ -33,7 +33,8 @@ class menu:
 
         for page in self.pages:
             if page != "runs" and page != "left":
-                temp = [runify(func, self.config) for func in tempMenu[page][1]]
+                temp = [runify(func, self.config)
+                        for func in tempMenu[page][1]]
                 self.menu[page] = [tempMenu[page][0], temp]  # type: ignore
 
         # Sets up font for menu
@@ -111,8 +112,10 @@ class menu:
             self.index += 1  # At end of run, move to next run
 
     def wrap_index(self, idx, theList):
-        if idx < 0 or idx >= len(theList):
+        if idx >= len(theList):
             idx = 0
+        elif idx < 0:
+            idx = len(theList)-1
         return idx
 
     # Displays all information on screen
@@ -169,5 +172,7 @@ class menu:
         self.config.stop()
         self.ev3.speaker.beep(frequency=1000, duration=250)
         self.ev3.light.on(Color.RED)
-        print("Run Took:", timer.time(), "s")
+        if self.pages[self.page] == "runs":
+            print(self.menu[self.pages[self.page]][0]
+                  [self.index], "Took:", timer.time(), "ms")
         self.config.state.setState(self.config.state.standby)
