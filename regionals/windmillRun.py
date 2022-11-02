@@ -29,17 +29,16 @@ class windmillRun(Thread):
         self.wait(800)
         self.drive.moveDist(80)
         self.wait(500)
-        self.drive.moveDist(-50)
         self.drive.setHead(45)
 
-        self.drive.moveDist(-180, heading=45)
+        self.drive.moveDist(-230, heading=45)
         self.drive.spinTo(-45)
 
         # In place for the car
         self.drive.moveDist(293, heading=-45)
-        self.flipper.run_angle(900, 500)
+        self.flipper.run_angle(900, 450)
         self.flipper.stop()
-        self.flipper.run_angle(-900, 500)
+        self.flipper.run_angle(-900, 450)
         self.flipper.stop()
 
         # Grabs the rechargable battery and goes home
