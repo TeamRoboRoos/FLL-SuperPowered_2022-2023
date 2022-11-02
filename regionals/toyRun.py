@@ -10,14 +10,13 @@ class toyRun(Thread):
     def run(self):
         self.drive.setHead()
 
-        self.drive.moveDist(120, heading=0)
-        self.drive.moveLight(self.config.Llight, [0, 10], heading=0)
+        self.drive.moveDist(220, heading=0)
 
         self.drive.turnTo(25)
         self.drive.moveDist(620)
         self.drive.turnTo(0)
 
-        self.drive.moveDist(200, heading=0)
+        self.drive.moveDist(150, heading=0)
 
         self.drive.moveDist(-222, heading=0)
         self.drive.spinTo(90)
