@@ -384,6 +384,8 @@ class DriveBaseFull:
                 break
             if timer.time() > timeout:
                 break
+            if self.config.state.getState() == 3:
+                break
 
             self.LLmotor.run((self.Llight.readLight()-50)*1.5*direction)
             self.RLmotor.run((self.Rlight.readLight()-50)*1.5*direction)
