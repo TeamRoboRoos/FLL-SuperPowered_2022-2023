@@ -9,24 +9,45 @@ class solarRun(Thread):
         self.wait = config.timer.wait
 
     def run(self):
+        self.drive.setHead(-74)
         self.drive.moveDist(550)
         self.drive.moveLight(self.config.Llight, [0, 5])
+        self.drive.turnTo(-90)
         self.drive.lineReset()
         self.drive.setHead(-90)
 
         self.drive.moveDist(70, heading=-90)
-        self.drive.turnTo(180)
+        self.drive.spinTo(180)
         self.drive.moveDist(-350, heading=180)
 
         self.config.LMmotor.run_angle(800, 500)
 
-        self.drive.turnTo(-60)
-        self.drive.moveDist(200, heading=-60)
-        self.drive.turnTo(-90)
-        self.config.RMmotor.run_angle(10000, 5800)
+        self.drive.moveDist(-120, heading=180)
+        self.drive.spinTo(-90)
+        self.drive.moveDist(100, heading=-90)
 
-        self.drive.moveDist(300, heading=-90)
-        self.config.RMmotor.run_angle(1000, -4400)
-        self.drive.moveDist(150, heading=-90)
+        Thread(target=self.config.LMmotor.run_angle, args=[800, -500]).start()
+        self.config.RMmotor.run_angle(10000, 3500)
+
+        self.drive.lineFollower(distance=320, mode=2,
+                                speed=140, kp=0.3, ki=0, kd=0)
+
+        self.config.RMmotor.run_angle(10000, -2000)
+
+        self.drive.lineFollower(mode=2, speed=140, kp=0.3, ki=0, kd=0)
+        self.drive.setHead(-90)
+        self.drive.moveDist(30)
+
+        Thread(target=self.config.RMmotor.run_angle,
+               args=[10000, -1500]).start()
+
+        for _ in range(0, 3):
+            self.config.LMmotor.run_angle(800, 600)
+            self.config.LMmotor.run_angle(800, -600)
+
+        self.drive.moveDist(-30)
+
+        self.drive.turnTo(-150)
+        self.drive.moveDist(700, down=False)
 
         self.config.state.setState(1)
