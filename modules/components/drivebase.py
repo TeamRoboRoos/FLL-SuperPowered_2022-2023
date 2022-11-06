@@ -46,8 +46,7 @@ class DriveBaseFull:
         timer = StopWatch()
         heading = self.getHead()
         while timer.time() < timeout and self.config.state.getState() != 3:
-            if self.turnAngle(heading) != 0:
-                break
+            self.config.ev3.screen.print(self.getHead())
             wait(100)
         self.ev3.speaker.beep(1000, 200)
 
