@@ -5,7 +5,7 @@ import pybricks.tools
 
 # Wrapper class for motor to allow for run to stop without quiting program
 class Motor():
-    def __init__(self, config, port,
+    def __init__(self, port, config,
                  positive_direction=Direction.CLOCKWISE,
                  gears=None):
         self.config = config

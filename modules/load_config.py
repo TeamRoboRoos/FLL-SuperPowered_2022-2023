@@ -48,15 +48,18 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "artemis.cal"
 
-            self.Lmotor = Motor(self, Port.B, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = Motor(self, Port.C, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = Motor(self, Port.A)
-            self.RMmotor = Motor(self, Port.D)
+            self.Lmotor = self.init(
+                Motor, Port.B, self, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = self.init(
+                Motor, Port.C, self, Direction.COUNTERCLOCKWISE)
+            self.LMmotor = self.init(Motor, Port.A, self)
+            self.RMmotor = self.init(Motor, Port.D, self)
 
             # self.runButton = runButton(TouchSensor(Port))
-            self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
-            self.Llight = LightSensor(Port.S3)
-            self.Rlight = LightSensor(Port.S4)
+            self.gyro = self.init(GyroSensor, Port.S1,
+                                  Direction.COUNTERCLOCKWISE)
+            self.Llight = self.init(LightSensor, Port.S3)
+            self.Rlight = self.init(LightSensor, Port.S4)
 
             self.lift = Forklift(self, self.RMmotor, 11, 40, 8)
             self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro,
@@ -83,15 +86,18 @@ class config:
             self.TURN_SPEED_MAX = 180
             self.LIGHTCAL_CONF = "apollo.cal"
 
-            self.Lmotor = Motor(self, Port.B, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = Motor(self, Port.A, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = Motor(self, Port.C)
-            self.RMmotor = Motor(self, Port.D)
+            self.Lmotor = self.init(
+                Motor, Port.B, self, Direction.COUNTERCLOCKWISE)
+            self.Rmotor = self.init(
+                Motor, Port.A, self, Direction.COUNTERCLOCKWISE)
+            self.LMmotor = self.init(Motor, Port.C, self)
+            self.RMmotor = self.init(Motor, Port.D, self)
 
             # self.runButton = runButton(TouchSensor(Port))
-            self.gyro = GyroSensor(Port.S1, Direction.COUNTERCLOCKWISE)
-            self.Llight = LightSensor(Port.S3)
-            self.Rlight = LightSensor(Port.S4)
+            self.gyro = self.init(GyroSensor, Port.S1,
+                                  Direction.COUNTERCLOCKWISE)
+            self.Llight = self.init(LightSensor, Port.S3)
+            self.Rlight = self.init(LightSensor, Port.S4)
 
             # self.lift = forklift(self, motor(self,
             #                                  Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
@@ -120,3 +126,13 @@ class config:
     def stop(self):
         for module in self.stopList:
             module.stop()
+
+    def init(self, type, port, *args, **kwargs):
+        try:
+            return type(port, *args, **kwargs)
+        except:
+            self.ev3.screen.clear()
+            self.ev3.screen.print(type.__name__, "\nOn port", port)
+            self.ev3.speaker.beep(500, 2000)
+            while True:
+                wait(1000)
