@@ -21,7 +21,7 @@ class toyRun(Thread):
         self.drive.moveDist(-222, heading=0)
         self.drive.spinTo(90)
 
-        self.drive.lineFollower(mode=1, speed=180, kp=0.3, ki=0, kd=0)
+        self.drive.lineFollower(mode=1, speed=120, kp=0.3, ki=0, kd=0)
         self.drive.setHead(90)
 
         self.drive.moveLight(self.config.Rlight, [0, 10], heading=90)
