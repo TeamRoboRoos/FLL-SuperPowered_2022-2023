@@ -36,6 +36,7 @@ class config:
         self.menu = {"left": []}
 
         self.stopList = []
+        self.display = []
 
         self.timer = Timer(self)
 
@@ -72,6 +73,7 @@ class config:
                 "pages": ["runs", "utility"]
             }
 
+            self.display = [self.drive.getHead]
             self.stopList = [self.drive, self.lift, self.LMmotor, self.RMmotor]
 
             # self.xlift = forklift(Motor(Port.B))
@@ -112,6 +114,7 @@ class config:
                 "pages": ["runs", "utility"]
             }
 
+            self.display = [self.drive.getHead]
             self.stopList = [self.drive, self.LMmotor, self.RMmotor]
 
             # self.xlift = forklift(Motor(Port.B))

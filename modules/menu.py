@@ -142,6 +142,16 @@ class menu:
         self.ev3.screen.print(
             self.config.name, ":", self.ev3.battery.voltage(), end="")
 
+    def displayInfo(self):
+        self.ev3.screen.clear()
+        for i in self.config.display:
+            self.ev3.screen.print(i())
+
+    def infoLoop(self):
+        while True:
+            self.displayInfo()
+            self.config.timer.wait(100)
+
     # Runs given run
     def run(self, func):
         self.ev3.speaker.beep(frequency=1000, duration=250)
@@ -166,6 +176,7 @@ class menu:
                     True) or Button.CENTER in self.ev3.buttons.pressed():
                 self.config.state.setState(self.config.state.stop)
 
+            self.displayInfo()
             wait(200)
 
         # Reset
