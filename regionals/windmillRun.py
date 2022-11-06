@@ -38,7 +38,7 @@ class windmillRun(Thread):
         self.drive.moveDist(293, heading=-45)
         self.flipper.run_angle(900, 450)
         self.flipper.stop()
-        self.flipper.run_angle(-900, 450)
+        # self.flipper.run_angle(-900, 450)
         self.flipper.stop()
 
         # Grabs the rechargable battery and goes home
