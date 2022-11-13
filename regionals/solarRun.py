@@ -33,7 +33,7 @@ class solarRun(Thread):
         self.drive.lineFollower(distance=300, mode=2,
                                 speed=140, kp=0.3, ki=0, kd=0)
 
-        self.config.RMmotor.run_angle(10000, -1900)
+        self.config.RMmotor.run_angle(10000, -2000)
 
         self.drive.lineFollower(mode=2, speed=140, kp=0.3, ki=0, kd=0)
         self.drive.setHead(-90)
@@ -49,6 +49,6 @@ class solarRun(Thread):
         self.drive.moveDist(-40)
 
         self.drive.turnTo(-140)
-        self.drive.moveDist(600, down=False, heading=-140)
+        self.drive.moveDist(600, down=False, turn=False, heading=-155)
 
         self.config.state.setState(1)
