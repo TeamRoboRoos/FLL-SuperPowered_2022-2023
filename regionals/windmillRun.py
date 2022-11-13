@@ -20,15 +20,10 @@ class windmillRun(Thread):
 
         # Push the windmill three times
         self.drive.moveDist(80)
-        self.wait(500)
         self.drive.moveDist(-50)
-        self.wait(800)
         self.drive.moveDist(80)
-        self.wait(500)
         self.drive.moveDist(-50)
-        self.wait(800)
         self.drive.moveDist(80)
-        self.wait(500)
         self.drive.setHead(45)
 
         self.drive.moveDist(-230, heading=45)
