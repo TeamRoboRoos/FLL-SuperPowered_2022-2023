@@ -40,15 +40,6 @@ class config:
 
         self.timer = Timer(self)
 
-        self.menu = {
-            # "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
-            # "left": [None, None, None, None, None, None],
-            "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)]],
-            "left": [None, None, None, None, None],
-            "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
-            "pages": ["runs", "utility"]
-        }
-
         # Define all robots beneath
         if self.name == "artemis":
             self.SPEED_LIST_COUNT = 2000
@@ -74,6 +65,15 @@ class config:
             self.lift = Forklift(self, self.RMmotor, 11, 40, 8)
             self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro,
                                        56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
+
+            self.menu = {
+                # "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
+                # "left": [None, None, None, None, None, None],
+                "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)]],
+                "left": [None, None, None, None, None],
+                "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
+                "pages": ["runs", "utility"]
+            }
 
             self.display = [self.drive.getHead]
             self.stopList = [self.drive, self.lift, self.LMmotor, self.RMmotor]
@@ -108,6 +108,15 @@ class config:
 
             self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro,
                                        56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
+
+            self.menu = {
+                # "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
+                # "left": [None, None, None, None, None, None],
+                "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)]],
+                "left": [None, None, None, None, None],
+                "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
+                "pages": ["runs", "utility"]
+            }
 
             self.display = [self.drive.getHead]
             self.stopList = [self.drive, self.LMmotor, self.RMmotor]
