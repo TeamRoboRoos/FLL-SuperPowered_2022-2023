@@ -28,7 +28,7 @@ class toyRun(Thread):
         self.drive.moveDist(270, heading=90)
         self.drive.turnTo(130)
 
-        self.drive.moveDist(80, heading=135)
+        self.drive.moveDist(80, heading=130)
 
         self.drive.moveDist(-100)
         self.drive.turnTo(90)
