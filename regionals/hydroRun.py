@@ -9,9 +9,9 @@ class hydroRun(Thread):
 
     def run(self):
         self.drive.setHead(90)
-        self.drive.moveDist(425, heading=90)
+        self.drive.moveDist(445, heading=90)
         self.drive.turnTo(45)
-        self.drive.moveDist(180, heading=45)
+        self.drive.moveDist(200, heading=45)
 
         self.config.LMmotor.run_angle(500, 400)
         self.config.RMmotor.run_angle(100, 150)
