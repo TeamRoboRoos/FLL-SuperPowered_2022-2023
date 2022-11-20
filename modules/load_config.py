@@ -43,7 +43,7 @@ class config:
         # Define all robots beneath
         if self.name == "artemis":
             self.SPEED_LIST_COUNT = 2000
-            self.ACCELERATION = 300
+            self.ACCELERATION = 350
             self.STARTSPEED = 50
             self.TURN_SPEED_MIN = 20
             self.TURN_SPEED_MAX = 180
@@ -84,7 +84,7 @@ class config:
 
         elif self.name == "apollo":
             self.SPEED_LIST_COUNT = 2000
-            self.ACCELERATION = 300
+            self.ACCELERATION = 350
             self.STARTSPEED = 50
             self.TURN_SPEED_MIN = 20
             self.TURN_SPEED_MAX = 180
