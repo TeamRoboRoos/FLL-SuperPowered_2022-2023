@@ -42,10 +42,9 @@ class DriveBaseFull:
         return max(min(input, bound[1]), bound[0])
 
     # Checks if gyro reading has changed within timeout seconds
-    def gyroDrift(self, timeout=20000):
-        timer = StopWatch()
+    def gyroDrift(self):
         heading = self.getHead()
-        while timer.time() < timeout and self.config.state.getState() != 3:
+        while self.config.state.getState() != 3:
             self.config.ev3.screen.print(self.getHead())
             wait(100)
         self.ev3.speaker.beep(1000, 200)
