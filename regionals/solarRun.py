@@ -9,8 +9,11 @@ class solarRun(Thread):
         self.wait = config.timer.wait
 
     def run(self):
-        self.drive.setHead(-74)
-        self.drive.moveDist(550)
+        self.drive.setHead(-90)
+        self.drive.moveDist(350)
+        self.drive.turnTo(-70)
+        self.drive.moveDist(300, heading=-70)
+
         self.drive.moveLight(self.config.Llight, [0, 5])
         self.drive.turnTo(-90)
         self.drive.lineReset()
@@ -19,13 +22,13 @@ class solarRun(Thread):
         self.drive.moveDist(70, heading=-90)
         self.drive.spinTo(180)
         self.drive.moveLight(self.config.Llight, [0, 5], heading=180)
-        self.drive.moveDist(-400, heading=180)
+        self.drive.moveDist(-360, heading=180)
 
         self.config.LMmotor.run_angle(800, 1000)
 
-        self.drive.moveDist(-70, heading=180)
+        self.drive.moveDist(-90, heading=180)
         self.drive.spinTo(-90)
-        self.drive.moveDist(100, heading=-90)
+        self.drive.moveDist(120, heading=-90)
 
         Thread(target=self.config.LMmotor.run_angle, args=[800, -1000]).start()
         self.config.RMmotor.run_angle(10000, 3400)
