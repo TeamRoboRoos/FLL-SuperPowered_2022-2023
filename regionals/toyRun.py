@@ -10,15 +10,15 @@ class toyRun(Thread):
     def run(self):
         self.drive.setHead()
 
-        self.drive.moveDist(220, heading=0)
+        self.drive.moveDist(320, heading=0)
 
-        self.drive.turnTo(25)
-        self.drive.moveDist(620)
+        self.drive.turnTo(40)
+        self.drive.moveDist(420, heading=40)
         self.drive.turnTo(0)
 
-        self.drive.moveDist(150, heading=0)
+        self.drive.moveDist(280, heading=0)
 
-        self.drive.moveDist(-222, heading=0)
+        self.drive.moveDist(-220, heading=0)
         self.drive.spinTo(90)
 
         self.drive.lineFollower(mode=1, speed=120, kp=0.3, ki=0, kd=0)
