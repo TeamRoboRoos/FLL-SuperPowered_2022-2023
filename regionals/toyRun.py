@@ -32,10 +32,10 @@ class toyRun(Thread):
 
         self.drive.moveDist(-100)
         self.drive.turnTo(90)
-        self.drive.moveDist(400)
-        self.drive.spinTo(180)
+
+        self.drive.moveDist(500)
+        self.drive.spinTo(150)
 
         self.drive.moveDist(-150)
-        self.drive.turnTo(160)
 
         self.config.state.setState(1)
