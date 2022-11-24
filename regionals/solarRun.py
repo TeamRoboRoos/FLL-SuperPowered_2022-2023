@@ -11,8 +11,8 @@ class solarRun(Thread):
     def run(self):
         self.drive.setHead(-90)
         self.drive.moveDist(350)
-        self.drive.turnTo(-70)
-        self.drive.moveDist(300, heading=-70)
+        self.drive.turnTo(-67)
+        self.drive.moveDist(300, heading=-67)
 
         self.drive.moveLight(self.config.Llight, [0, 5])
         self.drive.turnTo(-90)
@@ -46,8 +46,8 @@ class solarRun(Thread):
                args=[10000, -1500]).start()
 
         for _ in range(0, 3):
-            self.config.LMmotor.run_angle(800, 1000)
-            self.config.LMmotor.run_angle(800, -1000)
+            self.config.LMmotor.run_angle(800, 700)
+            self.config.LMmotor.run_angle(800, -700)
 
         self.drive.moveDist(-40)
 
