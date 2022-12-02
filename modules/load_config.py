@@ -75,7 +75,8 @@ class config:
                 "pages": ["runs", "utility"]
             }
 
-            self.display = [self.drive.getHead]
+            self.display = [self.drive.getHead,
+                            self.Llight.readLight, self.Rlight.readLight]
             self.stopList = [self.drive, self.lift, self.LMmotor, self.RMmotor]
 
             # self.xlift = forklift(Motor(Port.B))
@@ -118,7 +119,8 @@ class config:
                 "pages": ["runs", "utility"]
             }
 
-            self.display = [self.drive.getHead]
+            self.display = [self.drive.getHead,
+                            self.Llight.readLight, self.Rlight.readLight]
             self.stopList = [self.drive, self.LMmotor, self.RMmotor]
 
             # self.xlift = forklift(Motor(Port.B))
