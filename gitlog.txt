@@ -1,3 +1,159 @@
+commit e4701605fce6c8f0f12066d962de0f8ce13bf7c5
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Wed Nov 23 20:14:53 2022 +1030
+
+    Toyrun drops off two water units
+
+commit 3ea20a0a7215d133d95b94a044331614830036f4
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Tue Nov 22 20:26:07 2022 +1030
+
+    Made robot not knock car around when delivering the truck
+
+commit d9706530bf23fb5d8edbd704035fd47cf3f4bcb4
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Tue Nov 22 20:25:46 2022 +1030
+
+    Made car more reliable
+
+commit 1d80e017db7b6b7b9bd6be6a349ebed1490cfde0
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Mon Nov 21 17:18:09 2022 +1030
+
+    Made toyRun more consistent
+
+commit 6b1b5fb4ea467476cf446623e442eebbaf9b4999
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Mon Nov 21 17:16:19 2022 +1030
+
+    Modified solarRun for with the jig
+
+commit eec9390bb8b0b281416311db0fb9393a6a33304a
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Mon Nov 21 17:16:03 2022 +1030
+
+    Adjusted windmillRun for using the jig
+
+commit 3d8d071c9aac322045c383809f4e415c015c12e9
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Mon Nov 21 17:15:38 2022 +1030
+
+    Got rid of timeout in gyrodrift
+
+commit 0d14ad967a31c695538cc2fb0452d294f89f23e0
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Mon Nov 21 14:36:20 2022 +1030
+
+    Made powerPlantRun more consistent
+
+commit be266c975de4f561380217ad3aa4fdd96623678a
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sun Nov 20 20:41:14 2022 +1030
+
+    Bring flipper back down after hitting car
+
+commit 3bc816087d8cb377cd31dcfaf3b828dba5097f66
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sun Nov 20 20:38:54 2022 +1030
+
+    Fixed windmillRun turn angle
+
+commit b111756e1d33013a77136931ca4e40509994688a
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sun Nov 20 20:03:49 2022 +1030
+
+    Made the robot faster and accelerate faster
+
+commit 2b0452e1af71ef2ee8b2e5be66d344b33bdd7474
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sun Nov 20 09:43:29 2022 +1030
+
+    Continued to work on hydroRun
+
+commit c62cddb7dbf46e82352d8f9bbe96851045e8c9a6
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sun Nov 20 09:43:18 2022 +1030
+
+    Made arm go back after powerplantRun
+
+commit 351105328ccc578a7ac7b3a8800a6321563908e9
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 19 17:05:44 2022 +1030
+
+    Modified arm attachments
+
+commit ca159bd0f52bf4c18728d1f4c2dc39d46a0e4bba
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 19 11:01:42 2022 +1030
+
+    Changed turn angle when approaching toy factory
+
+commit d3ba4c7299596a5b3bc86fdc225852dc919f76b6
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 19 11:00:27 2022 +1030
+
+    Changed the acceleration from 250 to 300
+
+commit 16ace2f4b936bd752f1b24c908e3f44bb32bb2e4
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 19 10:56:57 2022 +1030
+
+    Moved menu config back into robots
+
+commit f8113cdf0d538c389dbf8bbd9c98925fa7851102
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 19 10:55:29 2022 +1030
+
+    TEST Made default speed 100 faster in moveDist
+
+commit 64de4b8b8e038170319e42b7b0328c871f996de5
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 19 10:54:32 2022 +1030
+
+    Got rid of extra turn in toyRun
+
+commit 3a348622962b7907104276dc77212904a8fe2eea
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 19 10:53:51 2022 +1030
+
+    Got rid of hydroRun
+
+commit e36c00813a7298e408521e4b1bf82fd692218527
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sun Nov 13 15:33:47 2022 +1030
+
+    Got rid of waits in windmillRun
+
+commit 947a2f467e7b48a1b123bb1e01894955259fd9d2
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sun Nov 13 15:33:32 2022 +1030
+
+    PowerPlantRun arm moves further and faster
+
+commit 38d7ebd98306dbf6e82f413b6d7f5c8b010b090d
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sun Nov 13 15:33:01 2022 +1030
+
+    SolarRun turns a bit when going back to base
+
+commit 6bf641f23e5c190c3a717d0aff77745ac76c68fc
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 12 16:35:39 2022 +1030
+
+    Modified solarRun
+
+commit 6bb19f6a54d035e2135b2bf55dd4ebec4e701bc7
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 12 16:35:20 2022 +1030
+
+    Tweaked winmillRun
+
+commit 6883c69023afc9a6daf4603396ba31e3b93aea45
+Author: Alan Lu <alan.lu@roboroos.org.au>
+Date:   Sat Nov 12 14:03:36 2022 +1030
+
+    Printed git log and code to pdf for printing
+
 commit c6cad3ae0117ffa95ec5e34245123633ebf659fe
 Author: Alan Lu <alan.lu@roboroos.org.au>
 Date:   Sun Nov 6 16:56:28 2022 +1030
