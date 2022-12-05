@@ -134,14 +134,16 @@ class menu:
             if count <= floor(curr_index / self.max_items) * self.max_items:
                 continue
 
-            if self.menu[self.pages[pageIdx]][0].index(item) == curr_index:
+            if count-1 == curr_index:
                 self.ev3.screen.print(">", item)
             else:
                 self.ev3.screen.print(" ", item)
 
             if count >= floor(curr_index / self.max_items) * self.max_items + self.max_items:
-                self.ev3.screen.print("  ...")
+                if len(self.menu[self.pages[pageIdx]][0]) > count:
+                    self.ev3.screen.print("  ...")
                 break
+                # if count >= floor(curr_index / self.max_items) * self.max_items + self.max_items + 1:
 
         self.ev3.screen.print(
             self.config.name, ":", self.ev3.battery.voltage(), end="")
