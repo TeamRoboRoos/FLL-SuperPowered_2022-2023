@@ -66,11 +66,9 @@ class config:
                                        56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
-                # "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
-                # "left": [None, None, None, None, None, None],
-                "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)]],
+                "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
                 "left": [None, None, None, None, None],
-                "utility": [["lightCal", "gyroCal", "tyreClean"], [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean]],
+                "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean],
                 "pages": ["runs", "utility"]
             }
 
@@ -109,11 +107,9 @@ class config:
                                        56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
             self.menu = {
-                # "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "hydroRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)]],
-                # "left": [None, None, None, None, None, None],
-                "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)]],
+                "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
                 "left": [None, None, None, None, None],
-                "utility": [["lightCal", "gyroCal", "tyreClean"], [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean]],
+                "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean],
                 "pages": ["runs", "utility"]
             }
 

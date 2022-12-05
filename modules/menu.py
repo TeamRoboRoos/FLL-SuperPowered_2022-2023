@@ -33,9 +33,13 @@ class menu:
 
         for page in self.pages:
             if page != "runs" and page != "left":
-                temp = [runify(func, self.config)
-                        for func in tempMenu[page][1]]
-                self.menu[page] = [tempMenu[page][0], temp]  # type: ignore
+                temp = [[item.__name__ for item in tempMenu[page]], [runify(func, self.config)
+                        for func in tempMenu[page]]]
+            elif page == "runs":
+                temp = [[item.__qualname__ for item in tempMenu[page]], tempMenu[page]]
+            else:
+                continue
+            self.menu[page] = temp[:]  # type: ignore
 
         # Sets up font for menu
         font = Font("Terminal", 16, monospace=True)
