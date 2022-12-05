@@ -68,7 +68,7 @@ class config:
             self.menu = {
                 "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
                 "left": [None, None, None, None, None],
-                "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean],
+                "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank],
                 "pages": ["runs", "utility"]
             }
 
@@ -109,7 +109,7 @@ class config:
             self.menu = {
                 "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
                 "left": [None, None, None, None, None],
-                "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean],
+                "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank],
                 "pages": ["runs", "utility"]
             }
 
