@@ -7,6 +7,7 @@ class Gyro(GyroSensor):
         super().__init__(port, direction)
         self.a = Ev3devSensor(port)
         self.config = config
+        self.calibrate()
 
     def calibrate(self):
         self.a.read("GYRO-CAL")  # type: ignore
