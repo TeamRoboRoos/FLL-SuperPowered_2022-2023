@@ -14,12 +14,12 @@ from modules.components.gyro import Gyro
 from modules.components.tools import RunState, Timer
 from modules.components.motor import Motor
 
-from regionals.windmillRun import windmillRun
-from regionals.powerPlantRun import powerPlantRun
-from regionals.solarRun import solarRun
-from regionals.oilRun import oilRun
-from regionals.hydroRun import hydroRun
-from regionals.toyRun import toyRun
+from nationals.windmillRun import windmillRun
+from nationals.powerPlantRun import powerPlantRun
+from nationals.solarRun import solarRun
+from nationals.oilRun import oilRun
+from nationals.hydroRun import hydroRun
+from nationals.toyRun import toyRun
 
 from os import popen
 
