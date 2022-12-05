@@ -10,7 +10,7 @@ from modules.components.drivebase import DriveBaseFull
 from modules.components.forklift import Forklift
 from modules.components.lightSensor import LightSensor
 from modules.components.runButton import RunButton
-from modules.components.gyro import GyroSensor
+from modules.components.gyro import Gyro
 from modules.components.tools import RunState, Timer
 from modules.components.motor import Motor
 
@@ -57,8 +57,7 @@ class config:
             self.RMmotor = self.init(Motor, Port.D, self)
 
             # self.runButton = runButton(TouchSensor(Port))
-            self.gyro = self.init(GyroSensor, Port.S1,
-                                  Direction.COUNTERCLOCKWISE)
+            self.gyro = self.init(Gyro, Port.S1, Direction.CLOCKWISE, self)
             self.Llight = self.init(LightSensor, Port.S3)
             self.Rlight = self.init(LightSensor, Port.S4)
 
@@ -71,7 +70,7 @@ class config:
                 # "left": [None, None, None, None, None, None],
                 "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)]],
                 "left": [None, None, None, None, None],
-                "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
+                "utility": [["lightCal", "gyroCal", "tyreClean"], [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
 
@@ -92,17 +91,16 @@ class config:
             self.LIGHTCAL_CONF = "apollo.cal"
 
             self.Lmotor = self.init(
-                Motor, Port.B, self, Direction.COUNTERCLOCKWISE)
-            self.Rmotor = self.init(
                 Motor, Port.A, self, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = self.init(Motor, Port.D, self)
-            self.RMmotor = self.init(Motor, Port.C, self)
+            self.Rmotor = self.init(
+                Motor, Port.C, self, Direction.COUNTERCLOCKWISE)
+            self.LMmotor = self.init(Motor, Port.B, self)
+            self.RMmotor = self.init(Motor, Port.D, self)
 
             # self.runButton = runButton(TouchSensor(Port))
-            self.gyro = self.init(GyroSensor, Port.S1,
-                                  Direction.COUNTERCLOCKWISE)
-            self.Llight = self.init(LightSensor, Port.S3)
-            self.Rlight = self.init(LightSensor, Port.S4)
+            self.gyro = self.init(Gyro, Port.S4, Direction.CLOCKWISE, self)
+            self.Llight = self.init(LightSensor, Port.S2)
+            self.Rlight = self.init(LightSensor, Port.S1)
 
             # self.lift = forklift(self, motor(self,
             #                                  Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
@@ -115,7 +113,7 @@ class config:
                 # "left": [None, None, None, None, None, None],
                 "runs": [["powerPlantRun", "windmillRun", "solarRun", "oilRun", "toyRun"], [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)]],
                 "left": [None, None, None, None, None],
-                "utility": [["lightCal", "gyrodrift", "tyreClean"], [self.drive.lightCal, self.drive.gyroDrift, self.drive.tyreClean]],
+                "utility": [["lightCal", "gyroCal", "tyreClean"], [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean]],
                 "pages": ["runs", "utility"]
             }
 
