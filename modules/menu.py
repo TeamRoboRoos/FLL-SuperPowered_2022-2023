@@ -4,6 +4,7 @@ from threading import Thread
 from pybricks.media.ev3dev import Font
 from pybricks.parameters import Button, Color
 from pybricks.tools import StopWatch, wait
+from time import sleep
 
 
 # Class to control running runs
@@ -13,6 +14,7 @@ class menu:
     refresh_time = 100
     max_items = 4
     last_color = None
+    last_idx = 0
 
     def __init__(self, config, volume):
         # If sound gets too annoying
@@ -80,6 +82,10 @@ class menu:
 
         # Displays all data
         self.displayMenu(self.index, self.page)
+
+        if self.index != self.last_idx:
+            self.beep(self.index + 1)
+            self.last_idx = self.index
 
         # Makes sure no button is pressed twice
         wait(self.refresh_time)
@@ -215,3 +221,8 @@ class menu:
             print(self.menu[self.pages[self.page]][0]
                   [self.index], "Took:", timer.time(), "ms")
         self.config.state.setState(self.config.state.standby)
+
+    def beep(self, times):
+        for _ in range(0, times):
+            self.ev3.speaker.beep(frequency=1000, duration=50)
+            sleep(0.07)
