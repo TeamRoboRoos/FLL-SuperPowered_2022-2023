@@ -36,7 +36,7 @@ class config:
         self.runButton = None
         self.menu = {"left": []}
         self.menuDefaultColor = Color.BROWN
-        self.menuSelector = False
+        self.menuSelector = None
 
         self.stopList = []
         self.display = []
