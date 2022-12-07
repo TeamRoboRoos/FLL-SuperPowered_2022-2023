@@ -53,16 +53,16 @@ class config:
             self.LIGHTCAL_CONF = "artemis.cal"
 
             self.Lmotor = self.init(
-                Motor, Port.B, self, Direction.COUNTERCLOCKWISE)
+                Motor, Port.A, self, Direction.COUNTERCLOCKWISE)
             self.Rmotor = self.init(
-                Motor, Port.C, self, Direction.COUNTERCLOCKWISE)
-            self.LMmotor = self.init(Motor, Port.A, self)
-            self.RMmotor = self.init(Motor, Port.D, self)
+                Motor, Port.D, self, Direction.COUNTERCLOCKWISE)
+            self.LMmotor = self.init(Motor, Port.B, self)
+            self.RMmotor = self.init(Motor, Port.C, self)
 
             # self.runButton = runButton(TouchSensor(Port))
-            self.gyro = self.init(Gyro, Port.S1, Direction.CLOCKWISE, self)
-            self.Llight = self.init(LightSensor, Port.S3)
-            self.Rlight = self.init(LightSensor, Port.S4)
+            self.gyro = self.init(Gyro, Port.S3, Direction.CLOCKWISE, self)
+            self.Llight = self.init(LightSensor, Port.S2)
+            self.Rlight = self.init(LightSensor, Port.S1)
 
             self.lift = Forklift(self, self.RMmotor, 11, 40, 8)
             self.drive = DriveBaseFull(self, self.Lmotor, self.Rmotor, self.gyro,
