@@ -33,10 +33,17 @@ class menu:
 
         for page in self.pages:
             if page != "runs" and page != "left":
-                temp = [[item.__name__ for item in tempMenu[page]], [runify(func, self.config)
-                        for func in tempMenu[page]]]
+                try:
+                    temp = [[tempMenu[page+"_name"], [runify(func, self.config)
+                            for func in tempMenu[page]]]]
+                except:
+                    temp = [[item.__name__ for item in tempMenu[page]], [runify(func, self.config)
+                            for func in tempMenu[page]]]
             elif page == "runs":
-                temp = [[item.__qualname__ for item in tempMenu[page]], tempMenu[page]]
+                try:
+                    temp = [[tempMenu["page"+"_name"], tempMenu[page]]]
+                except:
+                    temp = [[item.__qualname__ for item in tempMenu[page]], tempMenu[page]]
             else:
                 continue
             self.menu[page] = temp[:]  # type: ignore

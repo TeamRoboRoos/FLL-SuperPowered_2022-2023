@@ -69,6 +69,7 @@ class config:
                 "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
                 "left": [None, None, None, None, None],
                 "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank],
+                "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank"],
                 "pages": ["runs", "utility"]
             }
 
@@ -110,6 +111,7 @@ class config:
                 "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
                 "left": [None, None, None, None, None],
                 "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank],
+                "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank"],
                 "pages": ["runs", "utility"]
             }
 

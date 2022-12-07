@@ -18,8 +18,8 @@ try:
 except KeyboardInterrupt:
     # Effectively changes namespace to config
     # eg. config.drive.turnTo becomes drive.turnTo
+    config.state.setState(3)
     config.stop()
-    config.state.setState(0)
     Thread(target=menu.infoLoop).start()
     contents = dir(config)
     for i in range(0, len(contents)):
