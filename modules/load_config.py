@@ -9,6 +9,7 @@ from pybricks.media.ev3dev import Font, SoundFile, ImageFile
 from modules.components.drivebase import DriveBaseFull
 from modules.components.forklift import Forklift
 from modules.components.lightSensor import LightSensor
+from modules.components.menuSelector import MenuSelector
 from modules.components.runButton import RunButton
 from modules.components.gyro import Gyro
 from modules.components.tools import RunState, Timer
@@ -34,6 +35,8 @@ class config:
         self.state = RunState()
         self.runButton = None
         self.menu = {"left": []}
+        self.menuDefaultColor = Color.BLACK
+        self.useMenuSelector = False
 
         self.stopList = []
         self.display = []
@@ -100,6 +103,9 @@ class config:
             self.gyro = self.init(Gyro, Port.S4, Direction.CLOCKWISE, self)
             self.Llight = self.init(LightSensor, Port.S2)
             self.Rlight = self.init(LightSensor, Port.S1)
+
+            self.menuSelector = self.init(MenuSelector, [Port.S3, Color.MAGENTA, Color.BLUE, Color.RED, Color.GREEN, Color.WHITE])
+            self.useMenuSelector = True
 
             # self.lift = forklift(self, motor(self,
             #                                  Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
