@@ -12,6 +12,7 @@ class menu:
     page = 0
     refresh_time = 100
     max_items = 4
+    last_color = None
 
     def __init__(self, config, volume):
         # If sound gets too annoying
@@ -20,6 +21,10 @@ class menu:
 
         # Gets configuration
         self.config = config
+
+        self.last_color = self.config.menuDefaultColor
+        if self.config.menuSelector != None:
+            Thread(target=self.config.menuSelector.update).start()
 
         # Gets menu data from config
         tempMenu = config.menu
@@ -80,7 +85,14 @@ class menu:
         wait(self.refresh_time)
         self.refresh_time = 100
 
-        # Gets buttons that are pressed
+        if self.config.menuSelector != None and self.config.menuSelector.color() != self.last_color:
+            idx = self.config.menuSelector.index()
+            if idx != None:
+                self.index = idx
+                self.last_color = self.config.menuSelector.color()
+                return
+
+            # Gets buttons that are pressed
         button = self.ev3.buttons.pressed()
 
         # Makes sure only one button is pressed
@@ -89,7 +101,6 @@ class menu:
             if Button.CENTER in button:
                 self.run(self.menu[self.pages[self.page]]
                          [1][self.index])
-                self.index += 1  # At end of run, move to next run
 
             # Moves up in the menu
             elif Button.UP in button:
@@ -121,7 +132,6 @@ class menu:
         elif self.config.runButton != None and self.config.runButton.pressed() == True:
             self.run(self.menu[self.pages[self.page]]
                      [1][self.index])
-            self.index += 1  # At end of run, move to next run
 
     def wrap_index(self, idx, theList):
         if idx >= len(theList):
@@ -195,6 +205,10 @@ class menu:
 
         # Reset
         self.config.stop()
+
+        if self.config.menuSelector == None or self.config.menuSelector.on == False:
+            self.index += 1
+
         self.ev3.speaker.beep(frequency=1000, duration=250)
         self.ev3.light.on(Color.RED)
         if self.pages[self.page] == "runs":

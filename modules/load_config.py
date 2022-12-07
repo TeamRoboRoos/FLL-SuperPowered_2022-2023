@@ -35,8 +35,8 @@ class config:
         self.state = RunState()
         self.runButton = None
         self.menu = {"left": []}
-        self.menuDefaultColor = Color.BLACK
-        self.useMenuSelector = False
+        self.menuDefaultColor = Color.BROWN
+        self.menuSelector = False
 
         self.stopList = []
         self.display = []
@@ -104,8 +104,8 @@ class config:
             self.Llight = self.init(LightSensor, Port.S2)
             self.Rlight = self.init(LightSensor, Port.S1)
 
-            self.menuSelector = self.init(MenuSelector, [Port.S3, Color.MAGENTA, Color.BLUE, Color.RED, Color.GREEN, Color.WHITE])
-            self.useMenuSelector = True
+            self.menuSelector = self.init(MenuSelector,
+                                          Port.S3, [Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.WHITE], Color.BROWN, self.state)
 
             # self.lift = forklift(self, motor(self,
             #                                  Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
@@ -116,13 +116,13 @@ class config:
             self.menu = {
                 "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
                 "left": [None, None, None, None, None],
-                "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank],
-                "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank"],
+                "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank, self.menuSelector.toggle],
+                "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank", "toggleAutoMenu"],
                 "pages": ["runs", "utility"]
             }
 
             self.display = [self.drive.getHead,
-                            self.Llight.readLight, self.Rlight.readLight]
+                            self.Llight.readLight, self.Rlight.readLight, self.menuSelector.index]
             self.stopList = [self.drive, self.LMmotor, self.RMmotor]
 
             # self.xlift = forklift(Motor(Port.B))
