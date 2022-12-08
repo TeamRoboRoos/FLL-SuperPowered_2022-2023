@@ -12,7 +12,7 @@ class config:
         self.state = RunState()
         self.runButton = None
         self.menu = {"left": []}
-        self.useMenuSelector = False
+        self.menuSelector = None
 
         self.stopList = []
         self.display = []

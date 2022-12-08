@@ -4,6 +4,7 @@ from threading import Thread
 from pybricks.media.ev3dev import Font
 from pybricks.parameters import Button, Color
 from pybricks.tools import StopWatch, wait
+from time import sleep
 
 
 # Class to control running runs
@@ -12,6 +13,8 @@ class menu:
     page = 0
     refresh_time = 100
     max_items = 4
+    last_color = None
+    last_idx = 0
 
     def __init__(self, config, volume):
         # If sound gets too annoying
@@ -20,6 +23,10 @@ class menu:
 
         # Gets configuration
         self.config = config
+
+        self.last_color = self.config.menuDefaultColor
+        if self.config.menuSelector != None:
+            Thread(target=self.config.menuSelector.update).start()
 
         # Gets menu data from config
         tempMenu = config.menu
@@ -34,8 +41,8 @@ class menu:
         for page in self.pages:
             if page != "runs" and page != "left":
                 try:
-                    temp = [[tempMenu[page+"_name"], [runify(func, self.config)
-                            for func in tempMenu[page]]]]
+                    temp = [tempMenu[page+"_name"], [runify(func, self.config)
+                            for func in tempMenu[page]]]
                 except:
                     temp = [[item.__name__ for item in tempMenu[page]], [runify(func, self.config)
                             for func in tempMenu[page]]]
@@ -43,7 +50,8 @@ class menu:
                 try:
                     temp = [[tempMenu["page"+"_name"], tempMenu[page]]]
                 except:
-                    temp = [[item.__qualname__ for item in tempMenu[page]], tempMenu[page]]
+                    temp = [
+                        [item.__qualname__ for item in tempMenu[page]], tempMenu[page]]
             else:
                 continue
             self.menu[page] = temp[:]  # type: ignore
@@ -75,11 +83,22 @@ class menu:
         # Displays all data
         self.displayMenu(self.index, self.page)
 
+        if self.index != self.last_idx:
+            self.beep(self.index + 1)
+            self.last_idx = self.index
+
         # Makes sure no button is pressed twice
         wait(self.refresh_time)
         self.refresh_time = 100
 
-        # Gets buttons that are pressed
+        if self.config.menuSelector != None and self.config.menuSelector.color() != self.last_color:
+            idx = self.config.menuSelector.index()
+            if idx != None:
+                self.index = idx
+                self.last_color = self.config.menuSelector.color()
+                return
+
+            # Gets buttons that are pressed
         button = self.ev3.buttons.pressed()
 
         # Makes sure only one button is pressed
@@ -88,7 +107,6 @@ class menu:
             if Button.CENTER in button:
                 self.run(self.menu[self.pages[self.page]]
                          [1][self.index])
-                self.index += 1  # At end of run, move to next run
 
             # Moves up in the menu
             elif Button.UP in button:
@@ -120,7 +138,6 @@ class menu:
         elif self.config.runButton != None and self.config.runButton.pressed() == True:
             self.run(self.menu[self.pages[self.page]]
                      [1][self.index])
-            self.index += 1  # At end of run, move to next run
 
     def wrap_index(self, idx, theList):
         if idx >= len(theList):
@@ -194,9 +211,18 @@ class menu:
 
         # Reset
         self.config.stop()
+
+        if self.config.menuSelector == None or self.config.menuSelector.on == False:
+            self.index += 1
+
         self.ev3.speaker.beep(frequency=1000, duration=250)
         self.ev3.light.on(Color.RED)
         if self.pages[self.page] == "runs":
             print(self.menu[self.pages[self.page]][0]
                   [self.index], "Took:", timer.time(), "ms")
         self.config.state.setState(self.config.state.standby)
+
+    def beep(self, times):
+        for _ in range(0, times):
+            self.ev3.speaker.beep(frequency=1000, duration=50)
+            sleep(0.07)
