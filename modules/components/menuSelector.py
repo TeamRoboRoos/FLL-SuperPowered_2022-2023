@@ -24,7 +24,7 @@ class MenuSelector:
                 self.values.append(color)
                 if len(self.values) > 100:
                     self.values.pop(0)
-            sleep(0.002)
+            sleep(0.004)
 
     def index(self):
         if self.on:
