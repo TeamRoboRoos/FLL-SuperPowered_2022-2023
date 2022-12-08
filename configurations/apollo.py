@@ -22,6 +22,7 @@ TURN_SPEED_MIN = 20
 TURN_SPEED_MAX = 200
 LIGHTCAL_CONF = "apollo.cal"
 
+
 class apollo(config):
     def __init__(self):
         super().__init__()
@@ -44,7 +45,8 @@ class apollo(config):
         self.Llight = self.init(LightSensor, Port.S2)
         self.Rlight = self.init(LightSensor, Port.S1)
 
-        self.menuSelector = self.init(MenuSelector, Port.S3, [Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.WHITE], Color.BROWN, self.state)
+        self.menuSelector = self.init(MenuSelector, Port.S3, [
+                                      Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.WHITE], Color.BROWN, self.state)
         self.useMenuSelector = True
 
         # self.lift = forklift(self, motor(self,
@@ -56,13 +58,13 @@ class apollo(config):
         self.menu = {
             "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
             "left": [None, None, None, None, None],
-            "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank],
-            "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank"],
+            "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank, self.menuSelector.toggle],
+            "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank", "toggleMenuSelector"],
             "pages": ["runs", "utility"]
         }
 
         self.display = [self.drive.getHead,
-                        self.Llight.readLight, self.Rlight.readLight]
+                        self.Llight.readLight, self.Rlight.readLight, self.menuSelector.color()]
         self.stopList = [self.drive, self.LMmotor, self.RMmotor]
 
         # self.xlift = forklift(Motor(Port.B))
