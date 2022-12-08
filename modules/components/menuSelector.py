@@ -13,6 +13,7 @@ class MenuSelector:
         self.max = 100
         self.colorMenu = colorMenu
         self.values = [defaultColor] * 100
+        self.defaultColor = defaultColor
         self.state = state
         self.on = True
 

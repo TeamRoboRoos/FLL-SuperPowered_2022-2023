@@ -18,6 +18,7 @@ class config:
         self.display = []
 
         self.timer = Timer(self)
+        self.name = popen('hostname').read().strip()
 
     def stop(self):
         for module in self.stopList:
@@ -36,7 +37,7 @@ class config:
 def load_config():
     name = popen('hostname').read().strip()
     try:
-        exec("import configurations." + name + " as config")
+        robot_config = getattr(getattr(__import__("configurations." + name), name), name)()
     except:
         brick = EV3Brick()
         brick.screen.clear()
@@ -44,4 +45,4 @@ def load_config():
         while True:
             wait(100)
 
-    return config
+    return robot_config

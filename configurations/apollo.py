@@ -24,6 +24,7 @@ LIGHTCAL_CONF = "apollo.cal"
 
 class apollo(config):
     def __init__(self):
+        super().__init__()
         self.SPEED_LIST_COUNT = 2000
         self.ACCELERATION = 380
         self.STARTSPEED = 60
@@ -43,7 +44,7 @@ class apollo(config):
         self.Llight = self.init(LightSensor, Port.S2)
         self.Rlight = self.init(LightSensor, Port.S1)
 
-        self.menuSelector = self.init(MenuSelector, [Port.S3, Color.MAGENTA, Color.BLUE, Color.RED, Color.GREEN, Color.WHITE])
+        self.menuSelector = self.init(MenuSelector, Port.S3, [Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.WHITE], Color.BROWN, self.state)
         self.useMenuSelector = True
 
         # self.lift = forklift(self, motor(self,

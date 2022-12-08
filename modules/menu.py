@@ -24,8 +24,8 @@ class menu:
         # Gets configuration
         self.config = config
 
-        self.last_color = self.config.menuDefaultColor
         if self.config.menuSelector != None:
+            self.last_color = self.config.menuSelector.defaultColor
             Thread(target=self.config.menuSelector.update).start()
 
         # Gets menu data from config
@@ -91,7 +91,7 @@ class menu:
         wait(self.refresh_time)
         self.refresh_time = 100
 
-        if self.config.menuSelector != None and self.config.menuSelector.color() != self.last_color:
+        if self.page == 0 and self.config.menuSelector != None and self.config.menuSelector.color() != self.last_color:
             idx = self.config.menuSelector.index()
             if idx != None:
                 self.index = idx
@@ -131,6 +131,8 @@ class menu:
             elif Button.RIGHT in button:
                 self.page += 1
                 self.index = 0
+                if self.config.menuSelector != None:
+                    self.last_color = self.config.menuSelector.defaultColor
                 self.refresh_time = 400
 
         # If no buttons are press, check if runButton exists and is pressed
