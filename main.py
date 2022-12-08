@@ -1,12 +1,12 @@
 #!/usr/bin/env pybricks-micropython
 import sys
 from threading import Thread
-from modules.load_config import config
+from modules import load_config
 from modules.menu import menu
 
 
 # Initialise config and main menu
-config = config()
+config = load_config.load_config()
 
 menu = menu(config, 20)
 print("Started")
@@ -18,8 +18,8 @@ try:
 except KeyboardInterrupt:
     # Effectively changes namespace to config
     # eg. config.drive.turnTo becomes drive.turnTo
-    config.state.setState(3)
-    config.stop()
+    config.state.setState(3)  # type: ignore
+    config.stop()  # type: ignore
     Thread(target=menu.infoLoop).start()
     contents = dir(config)
     for i in range(0, len(contents)):
