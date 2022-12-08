@@ -93,9 +93,9 @@ class menu:
 
         if self.page == 0 and self.config.menuSelector != None and self.config.menuSelector.color() != self.last_color:
             idx = self.config.menuSelector.index()
+            self.last_color = self.config.menuSelector.color()
             if idx != None:
                 self.index = idx
-                self.last_color = self.config.menuSelector.color()
                 return
 
             # Gets buttons that are pressed
