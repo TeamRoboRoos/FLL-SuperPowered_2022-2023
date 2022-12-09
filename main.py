@@ -20,9 +20,11 @@ except KeyboardInterrupt:
     # eg. config.drive.turnTo becomes drive.turnTo
     config.state.setState(3)  # type: ignore
     config.stop()  # type: ignore
+    config.ev3.screen.clear()
     Thread(target=menu.infoLoop).start()
     contents = dir(config)
     for i in range(0, len(contents)):
         if "_" not in list(contents[i]):
             exec(contents[i] + " = config." + contents[i])
+    config.state.setState(1)  # type: ignore
     sys.exit()
