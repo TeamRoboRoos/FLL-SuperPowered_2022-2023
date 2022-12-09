@@ -27,7 +27,7 @@ class apollo(config):
     def __init__(self):
         super().__init__()
         self.SPEED_LIST_COUNT = 2000
-        self.ACCELERATION = 380
+        self.ACCELERATION = 400
         self.STARTSPEED = 60
         self.TURN_SPEED_MIN = 20
         self.TURN_SPEED_MAX = 200
@@ -64,7 +64,7 @@ class apollo(config):
         }
 
         self.display = [self.drive.getHead,
-                        self.Llight.readLight, self.Rlight.readLight, self.menuSelector.color()]
+                        self.Llight.readLight, self.Rlight.readLight, self.menuSelector.color]
         self.stopList = [self.drive, self.LMmotor, self.RMmotor]
 
         # self.xlift = forklift(Motor(Port.B))
