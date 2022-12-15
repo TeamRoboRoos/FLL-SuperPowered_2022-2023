@@ -142,8 +142,8 @@ class menu:
             # Each run has a corresponding function that can be run through the
             # left button
             elif Button.LEFT in button:
-                if self.menu["left"][self.index] != None:
-                    self.menu["left"][self.index]()
+                if self.page == self.config.leftpage and self.menu["left"][self.index] != None:
+                    self.run(self.menu["left"][self.index])
                 else:
                     print("Nothing assigned")
                 self.refresh_time = 200

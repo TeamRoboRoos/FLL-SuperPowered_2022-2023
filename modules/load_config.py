@@ -13,6 +13,7 @@ class config:
         self.runButton = None
         self.menu = {"left": []}
         self.menuSelector = None
+        self.leftpage = None
 
         self.stopList = []
         self.display = []

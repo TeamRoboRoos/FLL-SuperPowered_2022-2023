@@ -48,6 +48,7 @@ class apollo(config):
         self.menuSelector = self.init(MenuSelector, Port.S3, [
                                       Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.WHITE], Color.BROWN, self.state)
         self.useMenuSelector = True
+        self.leftpage = "runs"
 
         # self.lift = forklift(self, motor(self,
         #                                  Port.D, gears=[[12, 20], [28, 20], [8, 40]]), 110)
