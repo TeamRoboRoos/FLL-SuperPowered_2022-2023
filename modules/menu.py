@@ -1,4 +1,5 @@
 from math import floor
+import types
 from modules.runify import runify
 from threading import Thread
 from pybricks.media.ev3dev import Font
@@ -39,19 +40,39 @@ class menu:
         self.menu["left"] = tempMenu["left"]
 
         for page in self.pages:
-            if page != "runs" and page != "left":
-                try:
-                    temp = [tempMenu[page+"_name"], [runify(func, self.config)
-                            for func in tempMenu[page]]]
-                except:
-                    temp = [[item.__name__ for item in tempMenu[page]], [runify(func, self.config)
-                            for func in tempMenu[page]]]
-            elif page == "runs":
-                try:
-                    temp = [[tempMenu["page"+"_name"], tempMenu[page]]]
-                except:
-                    temp = [
-                        [item.__qualname__ for item in tempMenu[page]], tempMenu[page]]
+            # if page != "runs" and page != "left":
+            #     try:
+            #         temp = [tempMenu[page+"_name"], [runify(func, self.config)
+            #                 for func in tempMenu[page]]]
+            #     except:
+            #         temp = [[item.__name__ for item in tempMenu[page]], [runify(func, self.config)
+            #                 for func in tempMenu[page]]]
+            # elif page == "runs":
+            #     try:
+            #         temp = [[tempMenu["page"+"_name"], tempMenu[page]]]
+            #     except:
+            #         temp = [
+            #             [item.__qualname__ for item in tempMenu[page]], tempMenu[page]]
+            if page != "left":
+                temp = [[], []]
+                count = 0
+                for item in tempMenu[page]:
+                    if type(item) == types.FunctionType:
+                        try:
+                            temp[0].append(tempMenu[page+"_name"][count])
+                            temp[1].append(runify(item, self.config))
+                        except:
+                            temp[0].append(item.__name__)
+                            temp[1].append(runify(item, self.config))
+                    else:
+                        try:
+                            temp[0].append(tempMenu[page+"_name"][count])
+                            temp[1].append(item)
+                        except:
+                            temp[0].append(item.__qualname__)
+                            temp[1].append(item)
+                    count += 1
+
             else:
                 continue
             self.menu[page] = temp[:]  # type: ignore
@@ -111,12 +132,12 @@ class menu:
             # Moves up in the menu
             elif Button.UP in button:
                 self.index -= 1
-                self.refresh_time = 400
+                self.refresh_time = 200
 
             # Moves down in menu
             elif Button.DOWN in button:
                 self.index += 1
-                self.refresh_time = 400
+                self.refresh_time = 200
 
             # Each run has a corresponding function that can be run through the
             # left button
@@ -125,7 +146,7 @@ class menu:
                     self.menu["left"][self.index]()
                 else:
                     print("Nothing assigned")
-                self.refresh_time = 400
+                self.refresh_time = 200
 
             # Switch pages
             elif Button.RIGHT in button:
@@ -133,7 +154,7 @@ class menu:
                 self.index = 0
                 if self.config.menuSelector != None:
                     self.last_color = self.config.menuSelector.defaultColor
-                self.refresh_time = 400
+                self.refresh_time = 200
 
         # If no buttons are press, check if runButton exists and is pressed
         # If true, run the run too
