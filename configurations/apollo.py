@@ -15,14 +15,6 @@ from modules.components.motor import Motor
 
 from modules.load_config import config
 
-SPEED_LIST_COUNT = 2000
-ACCELERATION = 380
-STARTSPEED = 60
-TURN_SPEED_MIN = 20
-TURN_SPEED_MAX = 200
-LIGHTCAL_CONF = "apollo.cal"
-
-
 class apollo(config):
     def __init__(self):
         super().__init__()
