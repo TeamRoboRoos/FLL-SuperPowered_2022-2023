@@ -4,6 +4,7 @@ from worlds.powerPlantRun import powerPlantRun
 from worlds.windmillRun import windmillRun
 from worlds.solarRun import solarRun
 from worlds.oilRun import oilRun
+from worlds.hydroRun import hydroRun
 from worlds.toyRun import toyRun
 
 from modules.components.drivebase import DriveBaseFull
@@ -14,6 +15,7 @@ from modules.components.tools import RunState, Timer
 from modules.components.motor import Motor
 
 from modules.load_config import config
+
 
 class apollo(config):
     def __init__(self):
@@ -38,7 +40,7 @@ class apollo(config):
         self.Rlight = self.init(LightSensor, Port.S1)
 
         self.menuSelector = self.init(MenuSelector, Port.S3, [
-                                      Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.WHITE], Color.BROWN, self.state)
+                                      Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.BLUE, Color.WHITE], Color.BROWN, self.state)
         self.useMenuSelector = True
         self.leftpage = "runs"
 
@@ -49,8 +51,8 @@ class apollo(config):
                                    56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
         self.menu = {
-            "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
-            "left": [None, None, None, None, None],
+            "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)],
+            "left": [None, None, None, None, None, None],
             "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank, self.menuSelector.toggle],
             "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank", "toggleMenuSelector"],
             "pages": ["runs", "utility"]
