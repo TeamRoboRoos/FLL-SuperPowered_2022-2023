@@ -16,6 +16,7 @@ class menu:
     max_items = 4
     last_color = None
     last_idx = 0
+    last_page = 0
 
     def __init__(self, config, volume):
         # If sound gets too annoying
@@ -57,7 +58,7 @@ class menu:
                 temp = [[], []]
                 count = 0
                 for item in tempMenu[page]:
-                    if type(item) == types.FunctionType:
+                    if type(item) == types.FunctionType or type(item) == types.MethodType:
                         try:
                             temp[0].append(tempMenu[page+"_name"][count])
                             temp[1].append(runify(item, self.config))
@@ -104,9 +105,10 @@ class menu:
         # Displays all data
         self.displayMenu(self.index, self.page)
 
-        if self.index != self.last_idx:
+        if self.index != self.last_idx or self.page != self.last_page:
             self.beep(self.index + 1)
             self.last_idx = self.index
+            self.last_page = self.page
 
         # Makes sure no button is pressed twice
         wait(self.refresh_time)
@@ -142,8 +144,9 @@ class menu:
             # Each run has a corresponding function that can be run through the
             # left button
             elif Button.LEFT in button:
-                if self.page == self.config.leftpage and self.menu["left"][self.index] != None:
-                    self.run(self.menu["left"][self.index])
+                if self.pages[self.page] == self.config.leftpage and self.menu["left"][self.index] != None:
+                    self.run(runify(self.menu["left"]
+                             [self.index], self.config), isRun=False)
                 else:
                     print("Nothing assigned")
                 self.refresh_time = 200
@@ -206,7 +209,7 @@ class menu:
             self.config.timer.wait(100)
 
     # Runs given run
-    def run(self, func):
+    def run(self, func, isRun=True):
         self.ev3.speaker.beep(frequency=1000, duration=250)
 
         self.config.state.setState(self.config.state.running)
@@ -240,7 +243,7 @@ class menu:
 
         self.ev3.speaker.beep(frequency=1000, duration=250)
         self.ev3.light.on(Color.RED)
-        if self.pages[self.page] == "runs":
+        if self.pages[self.page] == "runs" and isRun:
             print(self.menu[self.pages[self.page]][0]
                   [self.index], "Took:", timer.time(), "ms")
         self.config.state.setState(self.config.state.standby)
