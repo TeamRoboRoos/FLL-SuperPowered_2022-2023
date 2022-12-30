@@ -22,10 +22,10 @@ class toyRun(Thread):
         self.drive.moveDist(-220, heading=0)
         self.drive.spinTo(90)
 
-        self.drive.lineFollower(distance=50, mode=1,
-                                speed=120, kp=0.3, ki=0, kd=0)
+        # self.drive.lineFollower(distance=50, mode=1,
+        #                         speed=120, kp=0.3, ki=0, kd=0)
 
-        self.arm.run_angle(-600, 200)
+        # self.arm.run_angle(-600, 200)
 
         self.drive.lineFollower(mode=1, speed=120, kp=0.3, ki=0, kd=0)
         self.drive.setHead(90)
