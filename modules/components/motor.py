@@ -32,6 +32,8 @@ class Motor():
         self.m.run_time(speed, time, then, False)
         while wait and self.control.done() == False and self.config.state.getState() != 3:
             pybricks.tools.wait(10)
+        if not wait:
+            return
         if then == Stop.HOLD:
             self.m.hold()
         elif then == Stop.BRAKE:
@@ -41,6 +43,8 @@ class Motor():
         self.m.run_angle(speed, rotation_angle, then, False)
         while wait and self.control.done() == False and self.config.state.getState() != 3:
             pybricks.tools.wait(10)
+        if not wait:
+            return
         if then == Stop.HOLD:
             self.m.hold()
         elif then == Stop.BRAKE:
@@ -50,6 +54,8 @@ class Motor():
         self.m.run_target(speed, target_angle, then, False)
         while wait and self.control.done() == False and self.config.state.getState() != 3:
             pybricks.tools.wait(10)
+        if not wait:
+            return
         if then == Stop.HOLD:
             self.m.hold()
         elif then == Stop.BRAKE:

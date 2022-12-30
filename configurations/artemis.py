@@ -1,4 +1,5 @@
 from pybricks.parameters import Port, Direction, Color
+from worlds.hydroRun import hydroRun
 
 from worlds.powerPlantRun import powerPlantRun
 from worlds.windmillRun import windmillRun
@@ -15,6 +16,7 @@ from modules.components.tools import RunState, Timer
 from modules.components.motor import Motor
 
 from modules.load_config import config
+
 
 class apollo(config):
     def __init__(self):
@@ -47,8 +49,8 @@ class apollo(config):
                                    56, 104, self.runButton, Llight=self.Llight, Rlight=self.Rlight)
 
         self.menu = {
-            "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), toyRun(self)],
-            "left": [None, None, None, None, None],
+            "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)],
+            "left": [None, None, None, None, None, None],
             "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank],
             "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank"],
             "pages": ["runs", "utility"]
