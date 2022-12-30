@@ -230,7 +230,7 @@ class menu:
                 self.config.state.setState(self.config.state.stop)
 
             self.displayInfo()
-            wait(200)
+            wait(80)
 
         # Reset
         self.config.stop()
