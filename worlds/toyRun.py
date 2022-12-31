@@ -10,14 +10,15 @@ class toyRun(Thread):
 
     def run(self):
         self.drive.setHead()
+        self.arm.run_time(200, 1000, wait=False)
 
-        self.drive.moveDist(320, heading=0)
+        self.drive.moveDist(370, heading=0)
 
         self.drive.turnTo(40)
         self.drive.moveDist(420, heading=40)
         self.drive.turnTo(0)
 
-        self.drive.moveDist(280, heading=0)
+        self.drive.moveDist(230, heading=0)
 
         self.drive.moveDist(-220, heading=0)
         self.drive.spinTo(90)
@@ -39,7 +40,10 @@ class toyRun(Thread):
         self.drive.moveDist(-60)
         self.drive.turnTo(90)
 
-        self.drive.moveDist(500)
+        self.drive.moveDist(90)
+        self.arm.run_time(-600, 500)
+
+        self.drive.moveDist(410)
         self.drive.spinTo(150)
 
         self.drive.moveDist(-200)
