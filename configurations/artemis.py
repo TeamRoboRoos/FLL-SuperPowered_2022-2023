@@ -18,7 +18,10 @@ from modules.components.motor import Motor
 from modules.load_config import config
 
 
-class apollo(config):
+class artemis(config):
+    def hydroRunResetArm(self):
+        self.RMmotor.run_time(100, 400)
+
     def __init__(self):
         super().__init__()
         self.SPEED_LIST_COUNT = 2000
@@ -50,7 +53,7 @@ class apollo(config):
 
         self.menu = {
             "runs": [powerPlantRun(self), windmillRun(self), solarRun(self), oilRun(self), hydroRun(self), toyRun(self)],
-            "left": [None, None, None, None, None, None],
+            "left": [None, None, None, None, None, self.hydroRunResetArm],
             "utility": [self.drive.lightCal, self.gyro.calibrate, self.drive.tyreClean, self.drive.blank],
             "utility_name": ["LightCal", "gyroCal", "tyreClean", "blank"],
             "pages": ["runs", "utility"]
