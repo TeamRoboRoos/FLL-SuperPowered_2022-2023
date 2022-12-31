@@ -4,7 +4,15 @@ from modules.components.tools import RunState, Timer
 from os import popen
 
 
+class PortError(Exception):
+    def __init__(self, message):
+        print(message)
+        self.message = message
+        super().__init__(message)
+
 # Holds information for one or more robots
+
+
 class config:
     def __init__(self):
         # Gets hostname to identify robot
@@ -29,21 +37,23 @@ class config:
         try:
             return type(port, *args, **kwargs)
         except:
-            self.ev3.screen.clear()
-            self.ev3.screen.print(type.__name__, "\nOn port", port)
-            self.ev3.speaker.beep(500, 2000)
-            while True:
-                wait(1000)
+            print("hii")
+            message = "{}\nOn port {}".format(type.__name__, port)
+            raise PortError(message)
+
 
 def load_config():
     name = popen('hostname').read().strip()
+    message = ""
     try:
-        robot_config = getattr(getattr(__import__("configurations." + name), name), name)()
+        robot_config = getattr(
+            getattr(__import__("configurations." + name), name), name)()
+    except PortError as e:
+        message = e.message
+        print("hi")
     except:
-        brick = EV3Brick()
-        brick.screen.clear()
-        brick.screen.print("Unkown robot\nNo config found")
-        while True:
-            wait(100)
-
-    return robot_config
+        if message == "":
+            message = "Unkown robot\nNo config found"
+    else:
+        return robot_config
+    return message

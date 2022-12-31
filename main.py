@@ -3,10 +3,19 @@ import sys
 from threading import Thread
 from modules import load_config
 from modules.menu import menu
+from pybricks.hubs import EV3Brick
 
 
 # Initialise config and main menu
 config = load_config.load_config()
+if type(config) == str:
+    ev3 = EV3Brick()
+    ev3.speaker.beep(600, 1000)
+    ev3.screen.clear()
+    ev3.screen.print(config)
+    while len(ev3.buttons.pressed()) == 0:  # type: ignore
+        pass
+    sys.exit()
 
 menu = menu(config, 100)
 print("Started")
