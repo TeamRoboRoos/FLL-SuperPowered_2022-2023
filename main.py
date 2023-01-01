@@ -19,7 +19,7 @@ if type(config) == str:
 
 menu = menu(config, 100)
 print("{} started with {}V".format(
-    config.name.title(), config.ev3.battery.voltage()))  # type: ignore
+    config.name, config.ev3.battery.voltage()))  # type: ignore
 
 # Run menu loop
 try:
