@@ -224,7 +224,7 @@ class DriveBaseFull:
 
     # When heading is set to None, moves with current heading
 
-    def moveDist(self, distance, speed=800, heading=None, turn=True, up=True, down=True, timeout=None):
+    def moveDist(self, distance, speed=700, heading=None, turn=True, up=True, down=True, timeout=None):
         if self.config.state.getState() == 3:
             return
 

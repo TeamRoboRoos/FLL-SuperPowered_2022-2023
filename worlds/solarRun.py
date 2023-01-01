@@ -21,19 +21,20 @@ class solarRun(Thread):
 
         self.drive.moveDist(70, heading=-90)
         self.drive.spinTo(180)
-        self.drive.moveLight(self.config.Llight, [0, 5], heading=180)
-        self.drive.moveDist(-360, heading=180)
+
+        # self.drive.moveLight(self.config.Llight, [0, 5], heading=180)
+        self.drive.moveDist(-320, heading=180)
 
         self.config.LMmotor.run_angle(800, 1000)
 
-        self.drive.moveDist(-90, heading=180)
+        self.drive.moveDist(-70, heading=180)
         self.drive.spinTo(-90)
         self.drive.moveDist(120, heading=-90)
 
         Thread(target=self.config.LMmotor.run_angle, args=[800, -1000]).start()
         self.config.RMmotor.run_angle(10000, 3400)
 
-        self.drive.lineFollower(distance=300, mode=2,
+        self.drive.lineFollower(distance=280, mode=2,
                                 speed=140, kp=0.3, ki=0, kd=0)
 
         self.config.RMmotor.run_angle(10000, -2000)

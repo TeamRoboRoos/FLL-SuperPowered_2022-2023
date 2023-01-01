@@ -24,7 +24,7 @@ class hydroRun(Thread):
         # self.drive.moveDist(-400)
         # self.drive.moveDist(-300, down=False, heading=90)
         self.drive.setHead(0)
-        self.arm.run_time(200, 1000, then=Stop.BRAKE, wait=False)
+        self.arm.run_time(100, 1000, then=Stop.BRAKE, wait=False)
 
         self.drive.moveDist(480, heading=0)
         self.drive.turnTo(50)
@@ -34,6 +34,10 @@ class hydroRun(Thread):
         self.arm.run_angle(200, -60)
         self.drive.moveDist(50)
         self.arm.run_angle(200, 170)
-        self.drive.moveDist(-600, heading=50, down=False)
+        self.drive.moveDist(-560, heading=50, down=True)
+
+        self.drive.turnTo(0)
+        self.drive.moveDist(135, heading=0)
+        self.drive.moveDist(-300, down=False)
 
         self.config.state.setState(1)

@@ -32,12 +32,12 @@ class toyRun(Thread):
         self.drive.setHead(90)
 
         self.drive.moveLight(self.config.Rlight, [0, 10], heading=90)
-        self.drive.moveDist(270, heading=90)
+        self.drive.moveDist(250, heading=90)
         self.drive.turnTo(120)
 
-        self.drive.moveDist(80, heading=120)
+        self.drive.moveDist(90, heading=120)
 
-        self.drive.moveDist(-60)
+        self.drive.moveDist(-70)
         self.drive.turnTo(90)
 
         self.drive.moveDist(90)

@@ -24,10 +24,10 @@ class apollo(config):
     def __init__(self):
         super().__init__()
         self.SPEED_LIST_COUNT = 2000
-        self.ACCELERATION = 400
-        self.STARTSPEED = 60
-        self.TURN_SPEED_MIN = 20
-        self.TURN_SPEED_MAX = 240
+        self.ACCELERATION = 420
+        self.STARTSPEED = 50
+        self.TURN_SPEED_MIN = 30
+        self.TURN_SPEED_MAX = 220
         self.LIGHTCAL_CONF = "apollo.cal"
 
         self.Lmotor = self.init(
