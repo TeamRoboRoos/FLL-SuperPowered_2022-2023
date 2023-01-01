@@ -27,7 +27,7 @@ class apollo(config):
         self.ACCELERATION = 400
         self.STARTSPEED = 60
         self.TURN_SPEED_MIN = 20
-        self.TURN_SPEED_MAX = 200
+        self.TURN_SPEED_MAX = 240
         self.LIGHTCAL_CONF = "apollo.cal"
 
         self.Lmotor = self.init(
