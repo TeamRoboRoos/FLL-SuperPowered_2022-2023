@@ -18,7 +18,8 @@ if type(config) == str:
     sys.exit()
 
 menu = menu(config, 100)
-print("Started")
+print("{} started with {}V".format(
+    config.name.title(), config.ev3.battery.voltage()))  # type: ignore
 
 # Run menu loop
 try:
@@ -29,7 +30,7 @@ except KeyboardInterrupt:
     # eg. config.drive.turnTo becomes drive.turnTo
     config.state.setState(3)  # type: ignore
     config.stop()  # type: ignore
-    config.ev3.screen.clear()
+    config.ev3.screen.clear()  # type: ignore
     Thread(target=menu.infoLoop).start()
     contents = dir(config)
     for i in range(0, len(contents)):
