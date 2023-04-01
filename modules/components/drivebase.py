@@ -374,13 +374,13 @@ class DriveBaseFull:
     def lineReset(self, direction=1, timeout=10000):
         timer = StopWatch()
         while True:
-            if self.Llight.readLight() in range(45, 55) and self.Rlight.readLight() in range(45, 55):
+            if self.Llight.readLight() in range(47, 53) and self.Rlight.readLight() in range(47, 53):
                 break
             if timer.time() > timeout:
                 break
             if self.config.state.getState() == 3:
                 break
 
-            self.LLmotor.run((self.Llight.readLight()-50)*1.5*direction)
-            self.RLmotor.run((self.Rlight.readLight()-50)*1.5*direction)
+            self.LLmotor.run((self.Llight.readLight()-50)*1.7*direction)
+            self.RLmotor.run((self.Rlight.readLight()-50)*1.7*direction)
         self.stop()
