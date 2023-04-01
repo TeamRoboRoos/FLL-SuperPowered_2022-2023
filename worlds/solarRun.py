@@ -17,7 +17,7 @@ class solarRun(Thread):
         self.drive.moveLight(self.config.Llight, [0, 5])
         self.drive.turnTo(-90)
         self.drive.lineReset()
-        self.drive.setHead(-90)
+        # self.drive.setHead(-90)
 
         self.drive.moveDist(70, heading=-90)
         self.drive.spinTo(180)
