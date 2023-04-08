@@ -20,7 +20,7 @@ from modules.load_config import config
 
 class artemis(config):
     def hydroRunResetArm(self):
-        self.RMmotor.run_time(100, 400)
+        self.RMmotor.run_time(300, 400)
 
     def __init__(self):
         super().__init__()
@@ -32,19 +32,20 @@ class artemis(config):
         self.LIGHTCAL_CONF = "artemis.cal"
 
         self.Lmotor = self.init(
-            Motor, Port.B, self, Direction.COUNTERCLOCKWISE)
+            Motor, Port.A, self, Direction.COUNTERCLOCKWISE)
         self.Rmotor = self.init(
-            Motor, Port.C, self, Direction.COUNTERCLOCKWISE)
-        self.LMmotor = self.init(Motor, Port.A, self)
-        self.RMmotor = self.init(Motor, Port.D, self)
+            Motor, Port.D, self, Direction.COUNTERCLOCKWISE)
+        self.LMmotor = self.init(Motor, Port.B, self)
+        self.RMmotor = self.init(Motor, Port.C, self)
 
         # self.runButton = runButton(TouchSensor(Port))
-        self.gyro = self.init(Gyro, Port.S1, Direction.CLOCKWISE, self)
-        self.Llight = self.init(LightSensor, Port.S3)
-        self.Rlight = self.init(LightSensor, Port.S4)
+        self.gyro = self.init(Gyro, Port.S3, Direction.CLOCKWISE, self)
+        self.Llight = self.init(LightSensor, Port.S2)
+        self.Rlight = self.init(LightSensor, Port.S1)
 
-        # self.menuSelector = self.init(MenuSelector, Port.S3, [Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.WHITE], Color.BROWN, self.state)
-        # self.useMenuSelector = True
+        self.menuSelector = self.init(MenuSelector, Port.S4, [
+                                      Color.BLACK, Color.RED, Color.GREEN, Color.YELLOW, Color.BLUE, Color.WHITE], Color.BROWN, self.state)
+        self.useMenuSelector = True
         self.leftpage = "runs"
 
         self.lift = Forklift(self, self.RMmotor, 11, 40, 8)

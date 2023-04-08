@@ -19,7 +19,7 @@ from modules.load_config import config
 
 class apollo(config):
     def hydroRunResetArm(self):
-        self.RMmotor.run_time(100, 400)
+        self.RMmotor.run_time(300, 400)
 
     def __init__(self):
         super().__init__()

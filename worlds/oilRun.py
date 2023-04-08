@@ -10,7 +10,7 @@ class oilRun(Thread):
     def run(self):
         self.drive.setHead()
 
-        self.drive.moveDist(220)
+        self.drive.moveDist(210, 600)
         self.drive.moveDist(-400, down=False)
 
         self.config.state.setState(1)
